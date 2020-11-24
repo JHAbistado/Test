@@ -6234,6 +6234,7 @@
     <Content Include="wwwroot\lib\jquery\dist\jquery.js" />
     <Content Include="wwwroot\lib\jquery\dist\jquery.min.js" />
     <Content Include="wwwroot\lib\jquery\LICENSE.txt" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -7483,7 +7484,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AssignRequests.cs" />
     <Compile Include="Models\Dashers.cs" />
+    <Compile Include="Models\ItemRequests.cs" />
     <Compile Include="Models\Packages.cs" />
     <Compile Include="Models\Teams.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -7506,6 +7509,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
     <Content Include="Views\Receptionist\Packages.cshtml" />
     <Content Include="Views\Receptionist\Dashers.cshtml" />
+    <Content Include="Views\Receptionist\Requests.cshtml" />
+    <Content Include="Views\Receptionist\Assign.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

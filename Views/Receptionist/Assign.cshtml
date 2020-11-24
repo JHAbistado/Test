@@ -1,0 +1,477 @@
+﻿@model MHD.Models.DashersModel
+@{
+    ViewBag.Title = "Assign Requests";
+    Layout = "~/Views/Shared/_Layout_Receptionist.cshtml";
+}
+
+<div id="content" class="content">
+
+    <!-- begin panel -->
+
+    <div class="panel panel-inverse">
+        <!-- begin panel-heading -->
+        <div class="panel-heading">
+
+            <h4 class="panel-title">My Home Dasher</h4>
+        </div>
+        @ViewData["requestid"]
+        <a href="#modal-dialog" class="btn btn-lg btn-success pull-right m-15" data-toggle="modal">ADD</a>
+        <!-- end panel-heading -->
+        <!-- begin panel-body -->
+        <div class="panel-body">
+            <table id="data-table-buttons" class=" table-responsive table-hover employees-table table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th width="1%" data-orderable="false"></th>
+                        <th class="text-center">Dasher Name</th>
+                        <th class="text-center">Phone Number</th>
+                        <th class="text-center">Date Screened</th>
+                        <th class="text-center">Date Added</th>
+                        <th class="text-center"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var data in Model.Dashers)
+                    {
+                        <tr class="gradeU">
+                            <td class="table_id f-s-600 text-center" type="hidden">@data.dasher_id</td>
+                            <td class="text-center"><b>@data.dasher_name</b></td>
+                            <td style="text-transform:uppercase" class="text-center">@data.dasher_dateadded</td>
+                            <td class="text-center">@data.dasher_number</td>
+                            @if (@data.dasher_screened == "1")
+                            {
+                                <td class="text-center">@data.dasher_screened</td>
+                            }
+                            @if (@data.dasher_screened == "0")
+                            {
+                                <td class="text-center">N/A</td>
+                            }
+                            <td class="text-center">@data.dasher_dateadded</td>
+
+                            <td class="text-center">
+                                <a onclick="DisposeDasher(@data.dasher_id)">
+                                    <button type="button" class="btn btn-danger">Assign To Requests</button>
+                                </a>
+                            </td>
+
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- end panel-body -->
+    </div>
+
+</div>
+
+
+
+<!-- modal for add new team -->
+<div class="modal fade" id="modal-dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add New Dasher</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="register-content">
+                    <form action="" id="new-dasher" class="margin-bottom-0">
+                        <meta name="csrf-token" id="csrf-token" content="{{ csrf_token() }}">
+
+                        <div class="row row-space-10">
+                            <div class="col-md-6">
+                                <label class="control-label">First Name <span class="text-danger">*</span></label>
+                                <div class="row m-b-15">
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control" name="firstname" placeholder=" " required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="control-label">Last Name <span class="text-danger">*</span></label>
+                                <div class="row m-b-15">
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control" name="lastname" placeholder=" " required />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space-10">
+                            <div class="col-md-6">
+                                <label class="control-label">Phone Number <span class="text-danger">*</span></label>
+                                <div class="row m-b-15">
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control" name="phonenumber" placeholder=" " required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="control-label">Car Details</label>
+                                <div class="row m-b-15">
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control" name="cardetails" placeholder=" " required />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                </div>
+
+                <div class="row row-space-10">
+
+                    <div class="col-md-6">
+                        <label class="control-label">Applicant Screened?<span class="text-danger">*</span></label>
+                        <div class="row m-b-5">
+                            <div class="col-md-12 ">
+
+                                <input type="checkbox" data-render="switchery" data-theme="blue" data-change="check-switchery-state-text" id="applicant_screened" checked />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6" id="date_screened">
+                        <label class="control-label">Date Screened</label>
+
+                        <div class="row m-b-5">
+                            <div class="col-md-12 ">
+
+                                <div class="input-group date" id="datepicker-default">
+                                    <input type="text" class="form-control datetimetotransact" id="datetimetotransact" name="datescreened">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+                <p class="text-center invalid-feedback" style="display: none;" id="error_request">
+                    Account Already Exists.
+                </p>
+
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:;" class="btn btn-white" data-dismiss="modal">Close</a>
+
+                <div class="register-buttons">
+                    <button type="submit" name="add_new_team" class="btn btn-primary btn-block">Add</button>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- end modal for add new team -->
+<!-- modal for edit dasher -->
+<div class=" modal fade" id="edit-dasher-info">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Edit Dasher</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="register-content">
+                    <form action="" id="edit-dasher" class="margin-bottom-0">
+                        <meta name="csrf-token" id="csrf-token" content="{{ csrf_token() }}">
+
+                        <div class="row row-space-10">
+                            <div class="col-md-6">
+                                <label class="control-label">First Name <span class="text-danger">*</span></label>
+                                <div class="row m-b-15">
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control" id="editfirstname" placeholder=" " required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="control-label">Last Name <span class="text-danger">*</span></label>
+                                <div class="row m-b-15">
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control" id="editlastname" placeholder=" " required />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space-10">
+                            <div class="col-md-6">
+                                <label class="control-label">Phone Number <span class="text-danger">*</span></label>
+                                <div class="row m-b-15">
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control" id="editphonenumber" placeholder=" " required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="control-label">Car Details</label>
+                                <div class="row m-b-15">
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control" id="editcardetails" placeholder=" " required />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                </div>
+
+                <div class="row row-space-10">
+
+                    <div class="col-md-6">
+                        <label class="control-label">Applicant Screened?<span class="text-danger">*</span></label>
+                        <div class="row m-b-5">
+                            <div class="col-md-12 ">
+
+                                <input type="checkbox" data-render="switchery" data-theme="blue" data-change="check-switchery-state-text" id="editscreened" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6" id="edit_datescreened">
+                        <label class="control-label">Date Screened</label>
+
+                        <div class="row m-b-5">
+                            <div class="col-md-12 ">
+
+                                <div class="input-group date" id="edit_datescreened">
+                                    <input type="text" class="form-control datetimetotransact" id="editdatescreened" name="editdatescreened">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-center invalid-feedback" style="display: none;" id="edit_dasher_error_request">
+                    Account Already Exists.
+                </p>
+
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:;" class="btn btn-white" data-dismiss="modal">Close</a>
+
+                <div class="register-buttons">
+                    <button type="submit" name="add_new_team" class="btn btn-primary btn-block">Update</button>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- end modal for add new team -->
+
+<script src="~/wwwroot/assets/plugins/jquery/jquery-3.2.1.min.js"></script>
+<script src="~/wwwroot/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+
+<link href="~/wwwroot/assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
+<link href="~/wwwroot/assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.css" rel="stylesheet" />
+<link href="~/wwwroot/assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
+<script src="~/wwwroot/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script src="~/wwwroot/assets/plugins/bootstrap-daterangepicker/moment.js"></script>
+<script src="~/wwwroot/assets/js/demo/form-plugins.demo.min.js"></script>
+
+<link href="~/wwwroot/assets/plugins/switchery/switchery.min.css" rel="stylesheet" />
+<script src="~/wwwroot/assets/plugins/DataTables/media/js/jquery.dataTables.js"></script>
+<script src="~/wwwroot/assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js"></script>
+<script src="~/wwwroot/assets/plugins/DataTables/extensions/Buttons/js/dataTables.buttons.min.js"></script>
+<script src="~/wwwroot/assets/plugins/DataTables/extensions/Buttons/js/buttons.bootstrap.min.js"></script>
+<script src="~/wwwroot/assets/plugins/DataTables/extensions/Buttons/js/buttons.flash.min.js"></script>
+<script src="~/wwwroot/assets/plugins/DataTables/extensions/Buttons/js/jszip.min.js"></script>
+<script src="~/wwwroot/assets/plugins/DataTables/extensions/Buttons/js/pdfmake.min.js"></script>
+<script src="~/wwwroot/assets/plugins/DataTables/extensions/Buttons/js/vfs_fonts.min.js"></script>
+<script src="~/wwwroot/assets/plugins/DataTables/extensions/Buttons/js/buttons.html5.min.js"></script>
+<script src="~/wwwroot/assets/plugins/DataTables/extensions/Buttons/js/buttons.print.min.js"></script>
+<script src="~/wwwroot/assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js"></script>
+<script src="~/wwwroot/assets/js/demo/table-manage-buttons.demo.min.js"></script>
+
+<script src="~/wwwroot/assets/js/demo/form-slider-switcher.demo.min.js"></script>
+<script src="~/wwwroot/assets/plugins/switchery/switchery.min.js"></script>
+
+<script src="~/wwwroot/assets/plugins/parsley/dist/parsley.js"></script>
+<script src="~/wwwroot/assets/plugins/jquery-smart-wizard/src/js/jquery.smartWizard.js"></script>
+<script src="~/wwwroot/assets/js/demo/form-wizards-validation.demo.min.js"></script>
+
+<script type="text/javascript">
+    function DisposeDasher(dasherid) {
+        var $teamid = (document.URL).substring(document.URL.lastIndexOf('=') + 1);
+        var formData = {
+            'dasherid': dasherid
+        };
+        $.ajax({
+            type: 'post',
+            url: '/Receptionist/DisposeDasher',
+            data: formData,
+            success: function (response) {
+                var obj = JSON.parse(response);
+                console.log(obj);
+                if (obj[0].RESULT == "ERROR") {
+                    alert("error");
+                }
+                else window.location = '/Receptionist/Dashers?team=' + $teamid;
+            }
+        });
+    }
+</script>
+<script type="text/javascript">
+
+
+         $(function () {
+
+    $('#new-dasher').on('submit', function (e) {
+    e.preventDefault();
+    var $screened;
+    var $datescreened;
+    var $teamid= (document.URL).substring(document.URL.lastIndexOf('=')+1);
+    if ($('#applicant_screened').is(":checked")){
+        $screened = 1;
+        $datescreened = $('input[name=datescreened]').val();
+    }
+        else{
+            $screened =0;
+            $datescreened = null;
+        }
+
+    var formData = {
+    'firstname'            : $('input[name=firstname]').val(),
+    'lastname'             : $('input[name=lastname]').val(),
+    'phonenumber'             : $('input[name=phonenumber]').val(),
+    'cardetails'             : $('input[name=cardetails]').val(),
+    'screened'             : $screened,
+    'datescreened'             : $datescreened,
+    'teamid'                :$teamid,
+    '_token': "{{ csrf_token() }}"
+    };
+    $.ajax({
+    type: 'post',
+    url: '/Receptionist/AddDasher',
+    data: formData,
+    success: function (response) {
+    var obj = JSON.parse(response);
+    console.log(obj);
+    if(obj[0].RESULT=="ERROR"){
+        if(obj[0].ERROR_CODE==s2627){
+        var x = document.getElementById("error_request");
+        x.innerHTML = "Dasher Phone Number Already Used.";
+        x.style.display = "block";
+        }
+    }
+        else window.location ='/Receptionist/Dashers?team='+$teamid;
+    }
+    });
+
+    });
+});
+</script>
+
+<script type="text/javascript">
+
+            function openEditDialog(id,name, pnumb, cardetails, screened, datescreened){
+                    $('#editfirstname').val(name.substring(0, name.lastIndexOf(" ")));
+                    $('#editlastname').val(name.substring(name.lastIndexOf(" ")+1,name.length));
+                    $('#editphonenumber').val(pnumb);
+                    $('#editcardetails').val(cardetails);
+                    $('#editdatescreened').val(datescreened);
+                $('#edit-dasher-info').modal('show');
+           if(screened=="1")$('#edit_datescreened').css("visibility", "visible");
+           else    $('#edit_datescreened').css("visibility", "hidden");
+        var $screened;
+        var $datescreened;
+        var $teamid= (document.URL).substring(document.URL.lastIndexOf('=')+1);
+        if ($('#edit_datescreened').is(":checked")){
+        $screened = 1;
+        $datescreened = $('input[name=editdatescreened]').val();
+        }
+        else{
+            $screened =0;
+            $datescreened = null;
+        }
+        $dasherid = id;
+         $("#edit-dasher").on("submit",function(e){
+    e.preventDefault();
+    var formData = {
+    'firstname'            : $('input[id=editfirstname]').val(),
+    'lastname'             : $('input[id=editlastname]').val(),
+    'phonenumber'             : $('input[id=editphonenumber]').val(),
+    'cardetails'             : $('input[id=editcardetails]').val(),
+    'screened'             : $screened,
+    'datescreened'             : $datescreened,
+    'dasherid'             : $dasherid,
+    '_token': "{{ csrf_token() }}"
+    };
+
+    $.ajax({
+    type: 'post',
+        url: '/Receptionist/UpdateDasher',
+    data: formData,
+    success: function (response) {
+    var obj = JSON.parse(response);
+    console.log(obj);
+    if(obj.RESULT=="ERROR"){
+        if(obj.ERROR_CODE==2627){
+        var x = document.getElementById("edit_dasher_error_request");
+        x.innerHTML = "Phone Number is Already Used";
+        x.style.display = "block";
+        }
+    }
+         else window.location ='/Receptionist/Dashers?team='+$teamid;
+    }
+    });
+
+});
+     }
+
+</script>
+
+<script>
+
+    $(document).ready(function () {
+        TableManageButtons.init();
+        App.init();
+
+
+        if ($('[data-render=switchery]').length !== 0) {
+            $('[data-render=switchery]').each(function () {
+                var themeColor = COLOR_GREEN;
+                if ($(this).attr('data-theme')) {
+                    themeColor = COLOR_BLUE;
+                }
+                var option = {};
+                option.color = themeColor;
+                option.secondaryColor = ($(this).attr('data-secondary-color')) ? $(this).attr('data-secondary-color') : '#dfdfdf';
+                option.className = ($(this).attr('data-classname')) ? $(this).attr('data-classname') : 'switchery';
+                option.disabled = ($(this).attr('data-disabled')) ? true : false;
+                option.disabledOpacity = ($(this).attr('data-disabled-opacity')) ? parseFloat($(this).attr('data-disabled-opacity')) : 0.5;
+                option.speed = ($(this).attr('data-speed')) ? $(this).attr('data-speed') : '0.5s';
+                var switchery = new Switchery(this, option);
+            });
+        }
+
+        $(document).on('change', '[data-change="check-switchery-state-text"]', function () {
+            if ($(this).prop('checked'))
+                $('#date_screened').css("visibility", "visible");
+            else
+                $('#date_screened').css("visibility", "hidden");
+
+        });
+        $(document).on('change', '#editscreened', function () {
+            if ($(this).prop('checked'))
+                $('#edit_datescreened').css("visibility", "visible");
+            else
+                $('#edit_datescreened').css("visibility", "hidden");
+
+        });
+
+
+    });
+
+    $('#datepicker-default').datepicker({
+        todayHighlight: true
+    });
+    $('#editdatescreened').datepicker({
+        todayHighlight: true
+    });
+
+</script>

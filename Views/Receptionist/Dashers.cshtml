@@ -55,7 +55,7 @@
                                 </a>
                             </td>
                             <td class="text-center">
-                                <a onclick="Disposepackage(@data.dasher_id)">
+                                <a onclick="DisposeDasher(@data.dasher_id)">
                                     <button type="button" class="btn btn-danger">Dispose</button>
                                 </a>
                             </td>
@@ -301,6 +301,29 @@
 <script src="~/wwwroot/assets/js/demo/form-wizards-validation.demo.min.js"></script>
 
 <script type="text/javascript">
+    function DisposeDasher(dasherid) {
+        var $teamid = (document.URL).substring(document.URL.lastIndexOf('=') + 1);
+        var formData = {
+            'dasherid': dasherid
+        };
+        $.ajax({
+            type: 'post',
+            url: '/Receptionist/DisposeDasher',
+            data: formData,
+            success: function (response) {
+                var obj = JSON.parse(response);
+                console.log(obj);
+                if (obj[0].RESULT == "ERROR") {
+                    alert("error");
+                }
+                else window.location = '/Receptionist/Dashers?team=' + $teamid;
+            }
+        });
+    }
+</script>
+<script type="text/javascript">
+
+
          $(function () {
 
     $('#new-dasher').on('submit', function (e) {
@@ -329,19 +352,19 @@
     };
     $.ajax({
     type: 'post',
-    url: '/Dashers/NewDasher',
+    url: '/Receptionist/AddDasher',
     data: formData,
     success: function (response) {
     var obj = JSON.parse(response);
     console.log(obj);
-    if(obj.NewDasher[0].RESULT=="ERROR"){
-        if(obj.NewDasher[0].ERROR_CODE==2627){
+    if(obj[0].RESULT=="ERROR"){
+        if(obj[0].ERROR_CODE==s2627){
         var x = document.getElementById("error_request");
         x.innerHTML = "Dasher Phone Number Already Used.";
         x.style.display = "block";
         }
     }
-        else window.location ='/Dashers/ViewDashers?team='+$teamid;
+        else window.location ='/Receptionist/Dashers?team='+$teamid;
     }
     });
 
@@ -381,26 +404,25 @@
     'cardetails'             : $('input[id=editcardetails]').val(),
     'screened'             : $screened,
     'datescreened'             : $datescreened,
-    'teamid'                :$teamid,
     'dasherid'             : $dasherid,
     '_token': "{{ csrf_token() }}"
     };
 
     $.ajax({
     type: 'post',
-    url: '/Dashers/UpdateDasherInfo',
+        url: '/Receptionist/UpdateDasher',
     data: formData,
     success: function (response) {
     var obj = JSON.parse(response);
     console.log(obj);
-    if(obj.UpdateDasher[0].RESULT=="ERROR"){
-        if(obj.UpdateDasher[0].ERROR_CODE==2627){
+    if(obj.RESULT=="ERROR"){
+        if(obj.ERROR_CODE==2627){
         var x = document.getElementById("edit_dasher_error_request");
         x.innerHTML = "Phone Number is Already Used";
         x.style.display = "block";
         }
     }
-         else window.location ='/Dashers/ViewDashers?team='+$teamid;
+         else window.location ='/Receptionist/Dashers?team='+$teamid;
     }
     });
 
