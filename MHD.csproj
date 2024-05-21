@@ -5443,6 +5443,7 @@
     <Content Include="metronic\src\plugins\keenthemes-icons\svg\068-dots.svg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="SQL\script.sql" />
     <Content Include="wwwroot\assets\crossbrowserjs\excanvas.min.js" />
     <Content Include="wwwroot\assets\crossbrowserjs\html5shiv.js" />
     <Content Include="wwwroot\assets\crossbrowserjs\respond.min.js" />
@@ -20351,7 +20352,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Security\" />
-    <Folder Include="SQL\" />
     <Folder Include="Views\Homeowners\" />
     <Folder Include="wwwroot\assets\img\coming-soon\" />
     <Folder Include="wwwroot\assets\img\cover\" />
