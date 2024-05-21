@@ -214,7 +214,6 @@
         }
 
         var data = {
-            'owner_id': '@ViewData["ACC_ID"]',
             'name': name,
             'type': type,
             'breed': breed,
@@ -277,7 +276,6 @@
                 var fileuri = "";
                 var fileData = new FormData();
                 fileData.append(files[0].name, files[0]);
-                fileData.append("id", @ViewData["ACC_ID"]);
                 fileData.append("name", name)
 
                 $.ajax({
@@ -314,13 +312,10 @@
         }
 
         function display_pets() {
-            var data = {
-                'owner_id': '@ViewData["ACC_ID"]'
-            }
+            
             $.ajax({
-                type: 'post',
+                type: 'get',
                 url: 'display_pets',
-                data: data,
                 async: true,
                 success: function (response) {
                     var result = JSON.parse(response);
@@ -332,7 +327,7 @@
                         var row = tableBody.insertRow();
                         row.insertCell(0).innerHTML = count;
                         row.insertCell(1).innerHTML = `<img style="height: 40px;
-            width: 50px;" src="/`+ item.picture + `" alt="IMAGE">`;
+            width: 50px;" src="`+ item.picture + `" alt="IMAGE">`;
                         row.insertCell(2).innerHTML += item.name;
                         row.insertCell(3).innerHTML += item.type;
                         row.insertCell(4).innerHTML += item.breed;

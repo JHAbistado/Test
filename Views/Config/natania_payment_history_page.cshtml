@@ -58,13 +58,9 @@
 <script>
     display_payment_history();
     function display_payment_history() {
-        var data = {
-            'owner_id': '@ViewData["ACC_ID"]'
-        }
         $.ajax({
-            type: 'post',
+            type: 'get',
             url: 'display_payment_history',
-            data: data,
             async: true,
             success: function (response) {
                 var result = JSON.parse(response);

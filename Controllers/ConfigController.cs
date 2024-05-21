@@ -26,7 +26,10 @@ namespace MHD.Controllers
     {
         public DataTable dt_content { get; set; }
 
-       
+        public string get_user_id()
+        {
+            return HttpContext.Session["ACC_ID"].ToString();
+        }
         public ActionResult pagekoto(string a)
         {
             return View();
@@ -92,7 +95,6 @@ namespace MHD.Controllers
         }
         public ActionResult natania_personal_information_page()
         {
-            ViewData["ACC_ID"] = HttpContext.Session["ACC_ID"].ToString();
             ViewData["FIRST_NAME"] = HttpContext.Session["FIRST_NAME"].ToString();
             ViewData["LAST_NAME"] = HttpContext.Session["LAST_NAME"].ToString();
             ViewData["MIDDLE_NAME"] = HttpContext.Session["MIDDLE_NAME"].ToString();
@@ -105,8 +107,6 @@ namespace MHD.Controllers
         }
         public ActionResult natania_address_page()
         {
-            ViewData["ACC_ID"] = HttpContext.Session["ACC_ID"].ToString();
-            
             ViewData["PHASE"] = HttpContext.Session["PHASE"].ToString();
             ViewData["LOT"] = HttpContext.Session["LOT"].ToString();
             ViewData["BLOCK"] = HttpContext.Session["BLOCK"].ToString();
@@ -120,27 +120,27 @@ namespace MHD.Controllers
         }
         public ActionResult natania_family_page()
         {
-            ViewData["ACC_ID"] = HttpContext.Session["ACC_ID"].ToString();
+           
             return View();
         }
         public ActionResult natania_pets_page()
         {
-            ViewData["ACC_ID"] = HttpContext.Session["ACC_ID"].ToString();      
+                  
             return View();
         }
         public ActionResult natania_vehicle_page()
         {
-            ViewData["ACC_ID"] = HttpContext.Session["ACC_ID"].ToString();
+            
             return View();
         }
         public ActionResult natania_payment_history_page()
         {
-            ViewData["ACC_ID"] = HttpContext.Session["ACC_ID"].ToString();
+           
             return View();
         }
         public ActionResult natania_payment_dues_page()
         {
-            ViewData["ACC_ID"] = HttpContext.Session["ACC_ID"].ToString();
+            
             return View();
         }
 
@@ -245,7 +245,6 @@ namespace MHD.Controllers
 
         public string add_account(string first_name, string last_name, string email, string password, string token)
         {
-
             string email_subject = "Verify Email";
             string template_name = email_subject;
             string link = "https://localhost:44316/Config/natania_verify_page?token=" + token + "&email=" + email;
@@ -303,22 +302,22 @@ namespace MHD.Controllers
                 new string[] {"email",  email},
                 new string[] {"password",  password}
             });
-
+            HttpContext.Session["ACC_ID"] = Convert.ToString(dt_content.Rows[0]["id"]);
             return (new Data.Convert().toJson(dt_content));
+
         }
 
-        public string get_details(string acc_id)
+        public string get_details()
         {
             Connection connection = new Connection();
 
             dt_content = connection.StartSEPH("get_details", new string[][]
             {
-                new string[] {"acc_id",  acc_id}
+                new string[] {"acc_id", get_user_id()}
             });
 
             if (dt_content.Rows.Count > 0)
             {
-                HttpContext.Session["ACC_ID"] = Convert.ToString(dt_content.Rows[0]["account_id"]);
                 HttpContext.Session["FIRST_NAME"] = Convert.ToString(dt_content.Rows[0]["first_name"]);
                 HttpContext.Session["LAST_NAME"] = Convert.ToString(dt_content.Rows[0]["last_name"]);
                 HttpContext.Session["MIDDLE_NAME"] = Convert.ToString(dt_content.Rows[0]["middle_name"]);
@@ -342,14 +341,14 @@ namespace MHD.Controllers
             return (new Data.Convert().toJson(dt_content));
         }
 
-        public string update_details(string account_id, string first_name, string last_name, string middle_name, string suffix_name, string email, 
+        public string update_details(string first_name, string last_name, string middle_name, string suffix_name, string email, 
             string age, string gender, string phone_no)
         {
             Connection connection = new Connection();
 
             dt_content = connection.StartSEPH("update_details", new string[][]
             {
-                new string[]{"account_id", account_id},
+                new string[]{"account_id", get_user_id()},
                 new string[]{"first_name", first_name},
                 new string[]{"last_name", last_name},
                 new string[]{"middle_name", middle_name},
@@ -362,12 +361,12 @@ namespace MHD.Controllers
             return (new Data.Convert().toJson(dt_content));
         }
 
-        public string update_address(string acc_id, string phase, string lot, string block, string street, string barangay, string city, string province, string country, string postal_code)
+        public string update_address(string phase, string lot, string block, string street, string barangay, string city, string province, string country, string postal_code)
         {
             Connection connection = new Connection();
             dt_content = connection.StartSEPH("update_address", new string[][]
             {
-                new string[]{"acc_id", acc_id},
+                new string[]{"acc_id", get_user_id() },
                 new string[]{"phase", phase},
                 new string[]{"lot", lot},
                 new string[]{"block", block},
@@ -381,13 +380,13 @@ namespace MHD.Controllers
             return (new Data.Convert().toJson(dt_content));
 
         }
-        public string add_family_member(string owner_id, string first_name, string last_name, string middle_name, string suffix_name, string age, string gender)
+        public string add_family_member(string first_name, string last_name, string middle_name, string suffix_name, string age, string gender)
         {
             Connection connection = new Connection();
 
             dt_content = connection.StartSEPH("add_family_member", new string[][]
             {
-                new string[] {"owner_id", owner_id},
+                new string[] {"owner_id", get_user_id()},
                 new string[]{ "first_name", first_name},
                 new string[]{ "last_name", last_name },
                 new string[]{ "middle_name", middle_name },
@@ -404,20 +403,20 @@ namespace MHD.Controllers
 
             dt_content = connection.StartSEPH("display_family_member", new string[][]
             {
-                new string[] {"owner_id", owner_id}
+                new string[] {"owner_id", get_user_id() }
             });
             return (new Data.Convert().toJson(dt_content));
         }
 
 
         //ADD PET
-        public string add_pet(string owner_id, string name, string type, string breed, string gender, string is_vaccinated)
+        public string add_pet(string name, string type, string breed, string gender, string is_vaccinated)
         {
             Connection connection = new Connection();
 
             dt_content = connection.StartSEPH("add_pet", new string[][]
             {
-                new string[] {"owner_id", owner_id},
+                new string[] {"owner_id", get_user_id()},
                 new string[] {"name", name},
                 new string[] {"type", type},
                 new string[] {"breed", breed},
@@ -428,26 +427,26 @@ namespace MHD.Controllers
         }
 
         //DISPLAY PETS
-        public string display_pets(string owner_id)
+        public string display_pets()
         {
             Connection connection = new Connection();
 
             dt_content = connection.StartSEPH("display_pets", new string[][]
             {
-                new string[] {"owner_id", owner_id}
+                new string[] {"owner_id", get_user_id() }
             });
             return (new Data.Convert().toJson(dt_content));
         }
 
         //Vehicle
         //CREATE
-        public string register_vehicle(string owner_id, string type, string brand, string model, string plate_number)
+        public string register_vehicle(string type, string brand, string model, string plate_number)
         {
             Connection connection = new Connection();
 
             dt_content = connection.StartSEPH("register_vehicle", new string[][]
             {
-                new string[] {"owner_id", owner_id},
+                new string[] {"owner_id", get_user_id()},
                 new string[]{"type", type},
                 new string[]{"brand", brand},
                 new string[]{"model", model},
@@ -455,23 +454,23 @@ namespace MHD.Controllers
             });
             return (new Data.Convert().toJson(dt_content));
         }
-        public string display_vehicle(string owner_id)
+        public string display_vehicle()
         {
             Connection connection = new Connection();
 
             dt_content = connection.StartSEPH("display_vehicle", new string[][]
             {
-                new string[] {"owner_id", owner_id}
+                new string[] {"owner_id", get_user_id() }
             });
             return (new Data.Convert().toJson(dt_content));
         }
 
-        public string display_payment_history(string owner_id)
+        public string display_payment_history()
         {
             Connection connection = new Connection();
             dt_content = connection.StartSEPH("display_payment_history", new string[][]
             {
-                new string[] {"owner_id", owner_id}
+                new string[] {"owner_id", get_user_id() }
             });
             return (new Data.Convert().toJson(dt_content));
         }
@@ -485,7 +484,7 @@ namespace MHD.Controllers
             return (new Data.Convert().toJson(dt_content));
         }
 
-        public string save_pet_pic(string temp, string id, string name)
+        public string save_pet_pic(string temp, string name)
         {
 
             string image = "", result = "0";
@@ -515,7 +514,7 @@ namespace MHD.Controllers
                     string imgpath = "/Upload/PetPicture/" + image;
                     dt_content = connection.StartSEPH("save_pet_pic", new string[][]
                     {
-                        new string[] {"owner_id", id},
+                        new string[] {"owner_id", get_user_id()},
                         new string[] {"name", name},
                         new string[] {"imgpath", imgpath}
                     });
@@ -530,7 +529,7 @@ namespace MHD.Controllers
             return result;
         }
 
-        public string save_orcr(string temp, string acc_id, string v_id)
+        public string save_orcr(string temp, string v_id)
         {
 
             string image = "", result = "0";
@@ -560,7 +559,7 @@ namespace MHD.Controllers
                     string imgpath = "/Upload/ORCR/" + image;
                     dt_content = connection.StartSEPH("save_orcr", new string[][]
                     {
-                        new string[] {"owner_id", acc_id},
+                        new string[] {"owner_id", get_user_id() },
                         new string[] {"v_id", v_id},
                         new string[] {"orcr", imgpath}
                     });

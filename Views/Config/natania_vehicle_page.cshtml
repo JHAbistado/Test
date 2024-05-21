@@ -154,7 +154,6 @@
 
         function register_vehicle() {
             var data = {
-                'owner_id': '@ViewData["ACC_ID"]',
                 'type': $('#type').val(),
                 'brand': $('#brand').val(),
                 'model': $('#model').val(),
@@ -196,7 +195,6 @@
           var fileuri = "";
           var fileData = new FormData();
           fileData.append(files[0].name, files[0]);
-          fileData.append("acc_id", @ViewData["ACC_ID"]);
           fileData.append("v_id", v_id)
 
           $.ajax({
@@ -230,13 +228,10 @@
   }
 
         function display_vehicle() {
-            var data = {
-                owner_id: '@ViewData["ACC_ID"]'
-            }
+            
             $.ajax({
-                type: 'post',
+                type: 'get',
                 url: 'display_vehicle',
-                data: data,
                 async: true,
                 success: function (response) {
                     var result = JSON.parse(response);
@@ -261,7 +256,6 @@
         }
 
         function clear_field() {
-            $('#owner_id').val('')
             $('#plate_number').val('')
             $('#type').val('');
             $('#vehicle_dropdownMenuButton').html('Select Type');

@@ -95,7 +95,6 @@
 
     function update_address() {
         var data = {
-            acc_id: '@ViewData["ACC_ID"]',
             phase: $('#phase').val(),
             lot: $('#lot').val(),
             block: $('#block').val(),
@@ -140,11 +139,9 @@
         });
     }
     function get_details() {
-    data = { 'acc_id': '@ViewData["ACC_ID"]' }
     $.ajax({
-        type: 'post',
+        type: 'get',
         url: 'get_details',
-        data: data,
         async: true,
         success: function (response) {
 

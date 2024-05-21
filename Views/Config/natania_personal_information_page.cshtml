@@ -159,7 +159,6 @@
 
     function update_details() {
         var data = {
-            'account_id': '@ViewData["ACC_ID"]',
             'first_name': $('#first_name').val(),
             'last_name': $('#last_name').val(),
             'middle_name': $('#middle_name').val(),
@@ -198,11 +197,9 @@
     }
 
     function get_details() {
-        data = { 'acc_id': '@ViewData["ACC_ID"]' }
         $.ajax({
-            type: 'post',
+            type: 'get',
             url: 'get_details',
-            data: data,
             async: true,
             success: function (response) {
 
