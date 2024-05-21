@@ -15,6 +15,8 @@ namespace MHD.Models
         public string dasher_datescreened { get; set; }
         public string dasher_dateadded { get; set; }
         public string dasher_car_details { get; set; }
+        public string dasher_location { get; set; }
+        public string dasher_location_id { get; set; }
     }
 
     public class DashersModel

@@ -14,6 +14,8 @@ namespace MHD.Models
         public string team_description { get; set; }
         public string date_created { get; set; }
         public string date_updated { get; set; }
+        public string property_name { get; set; }
+        public string property_id { get; set; }
 
        
     }

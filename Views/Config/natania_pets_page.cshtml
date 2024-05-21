@@ -1,0 +1,359 @@
+﻿@{
+    ViewBag.Title = "Pets";
+}
+
+@{
+    Layout = "~/Views/Shared/_Layout_Natania.cshtml";
+}
+
+<!--begin::Subheader-->
+<div class="subheader py-3 py-lg-8 subheader-transparent" id="kt_subheader">
+    <div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+        <!--begin::Info-->
+        <div class="d-flex align-items-center mr-1">
+            <!--begin::Page Heading-->
+            <div class="d-flex align-items-baseline flex-wrap mr-5">
+                <!--begin::Page Title-->
+                <h2 class="d-flex align-items-center text-dark font-weight-bold my-1 mr-3">Pets</h2>
+                <!--end::Page Title-->
+                <!--begin::Breadcrumb-->
+                <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold my-2 p-0">
+                    <li class="breadcrumb-item text-muted">
+                        <a href="" class="text-muted">User</a>
+                    </li>
+                    <li class="breadcrumb-item text-muted">
+                        <a href="" class="text-muted">My Family</a>
+                    </li>
+                    <li class="breadcrumb-item text-muted">
+                        <a href="" class="text-muted">Pets</a>
+                    </li>
+                </ul>
+                <!--end::Breadcrumb-->
+            </div>
+            <!--end::Page Heading-->
+        </div>
+        <!--end::Info-->
+        <!--begin::Toolbar-->
+        <div class="d-flex align-items-center flex-wrap">
+            <!-- Button trigger modal-->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                <span class="svg-icon svg-icon-lg">
+                    <!--begin::Svg Icon | path:assets/media/svg/icons/Files/File.svg-->
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <polygon points="0 0 24 0 24 24 0 24" />
+                            <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                            <rect fill="#000000" x="6" y="11" width="9" height="2" rx="1" />
+                            <rect fill="#000000" x="6" y="15" width="5" height="2" rx="1" />
+                        </g>
+                    </svg>
+                    <!--end::Svg Icon-->
+                </span>
+                Add Pets
+            </button>
+
+
+            <!-- Modal-->
+            <div class="modal fade" id="exampleModalCenter" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 1000px;">
+
+                    <div class="modal-content">
+
+                        <div class="modal position-relative d-block" tabindex="-1" role="dialog">
+                            <div>
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Enter Pet Details</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <i aria-hidden="true" class="ki ki-close"></i>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-group mb-8">
+                                            <div class="alert alert-custom alert-default border-1" role="alert">
+                                                <div class="alert-icon"><i class="flaticon-warning text-primary"></i></div>
+                                                <div class="alert-text">
+                                                    Please fill up the form properly.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-4 form-group">
+                                                <label>Name<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="name" placeholder="Enter Name" />
+                                            </div>
+                                            <div class="col-4 form-group">
+                                                <label for="exampleInputPassword1">Type<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="type" placeholder="Example: dog, cat, etc." />
+                                            </div>
+                                            <div class="col-4 form-group">
+                                                <label>Gender*</label>
+                                                <input type="hidden" class="form-control form-control-solid" placeholder="Enter gender" id="gender" />
+                                                <div class="dropdown">
+                                                    <button class="btn btn-outline-secondary col-12 text-left" type="button" id="gender_dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        Select Gender
+                                                    </button>
+                                                    <ul class="dropdown-menu col-12 border-1" aria-labelledby="gender_dropdownMenuButton" id="gender_list">
+                                                        <li><a class="dropdown-item" href="#">Male</a></li>
+                                                        <li><a class="dropdown-item" href="#">Female</a></li>
+                                                        <li><a class="dropdown-item" href="#">Other</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-4 form-group">
+                                                <label>Is Vaccinated?*</label>
+                                                <input type="hidden" class="form-control form-control-solid" id="is_vaccinated" />
+                                                <div class="dropdown">
+                                                    <button class="btn btn-outline-secondary col-12 text-left" type="button" id="is_vaccinated_dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        Yes or No
+                                                    </button>
+                                                    <ul class="dropdown-menu col-12 border-1" aria-labelledby="is_vaccinated_dropdownMenuButton" id="is_vaccinated_list">
+                                                        <li><a class="dropdown-item" href="#" value="1">Yes</a></li>
+                                                        <li><a class="dropdown-item" href="#" value="0">No</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="col-4 form-group">
+                                                <label for="exampleInputPassword1">Breed<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="breed" placeholder="Example: aspin, shih tzu, etc." />
+                                            </div>
+                                            <div class="col-3 mt-8 ml-4 custom-file">
+                                                <input type="file" class="custom-file-input" id="picture" />
+                                                <label class="custom-file-label" for="picture">Upload Picture</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-3 ml-4 mt-8 custom-file d-none" id="div_upload_vaccine">
+                                                <input type="file" class="custom-file-input" id="picture" />
+                                                <label class="custom-file-label" for="picture">Upload Vaccine</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="add_pet()">Add Pet</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end::Dropdown-->
+        </div>
+        <!--end::Toolbar-->
+    </div>
+</div>
+<!--end::Subheader-->
+<!--begin::Main-->
+<div class="container">
+    <!--begin::Table-->
+
+    <table class="table" id="pets_table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Picture</th>
+                <th scope="col">Name</th>
+                <th scope="col">Type</th>
+                <th scope="col">Breed</th>
+                <th scope="col">Gender</th>
+                <th scope="col">Vaccinated?</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <!--end::Table-->
+</div>
+<!--end::Main-->
+
+
+<script>
+        display_pets();
+    $('#gender_list li a').on('click', function () {
+        $('#gender').val($(this).html());
+        $('#gender_dropdownMenuButton').html($(this).html());
+    });
+    $('#is_vaccinated_list li a').on('click', function () {
+        $('#is_vaccinated').val($(this).html());
+        $('#is_vaccinated_dropdownMenuButton').html($(this).html())
+    })
+
+    $('#is_vaccinated_list li a').on('click', function () {
+        if ($(this).html() == 'Yes') {
+            $('#div_upload_vaccine').removeClass('d-none');
+        }
+        else {
+            $('#div_upload_vaccine').addClass('d-none');
+        }
+
+        $('#is_vaccinated').val($(this).html());
+        $('#is_vaccinated_dropdownMenuButton').html($(this).html())
+    })
+
+    function add_pet() {
+
+        KTApp.blockPage({
+            overlayColor: '#000000',
+            state: 'danger',
+            message: 'Please wait...'
+        });
+
+        var name = $('#name').val()
+        var type = $('#type').val()
+        var breed = $('#breed').val()
+        var gender = $('#gender').val()
+        var is_vaccinated = $('#is_vaccinated').val()
+        if (is_vaccinated == "Yes") {
+            is_vaccinated = 1;
+        }
+        else {
+            is_vaccinated = 0;
+        }
+
+        var data = {
+            'owner_id': '@ViewData["ACC_ID"]',
+            'name': name,
+            'type': type,
+            'breed': breed,
+            'gender': gender,
+            'is_vaccinated': is_vaccinated
+        }
+
+        $.ajax({
+            type: 'post',
+            url: 'add_pet',
+            data: data,
+            async: true,
+            success: function (response) {
+                var result = JSON.parse(response);
+
+                if (result[0].result == "success") {
+                    SaveFile(result[0].name);
+                }
+                else if (result[0].result == "error - pet already exist") {
+                    swal({
+                        title: 'Error',
+                        text: 'Pet already exist',
+                        timer: 3000,
+                        icon: "error",
+                        button: false
+                    }).then(
+                        function () {
+                            clear_fields();
+                        }
+                    )
+                }
+                else {
+                    swal({
+                        title: 'Error',
+                        text: 'Server Error',
+                        timer: 3000,
+                        icon: "error",
+                        button: false
+                    }).then(
+                        function () {
+                            clear_fields();
+                        }
+
+                    )
+                }
+
+            }
+        })
+
+        KTApp.unblockPage();
+    }
+
+      function SaveFile(name) {
+
+            var files = document.getElementById('picture').files;
+
+            const fileSize = files[0].size / 1024 / 1024;
+            if (!(fileSize > 20)) {
+
+                var fileuri = "";
+                var fileData = new FormData();
+                fileData.append(files[0].name, files[0]);
+                fileData.append("id", @ViewData["ACC_ID"]);
+                fileData.append("name", name)
+
+                $.ajax({
+                    url: '/Config/save_pet_pic',
+                    type: 'post',
+                    datatype: 'json',
+                    contentType: false,
+                    processData: false,
+                    async: false,
+                    data: fileData,
+                    success: function (response) {
+                        if (response == "0") alert("Error");
+                        else {
+                            swal({
+                                title: 'Success',
+                                text: 'Pet added successfully',
+                                timer: 2000,
+                                icon: "success",
+                                button: false
+                            }).then(
+                                function () {
+                                    clear_fields()
+                                    display_pets();
+                                })
+                        }
+                    }
+                });
+
+            }
+            else {
+                alert("Files cannot be more than 20MB");
+            }
+
+        }
+
+        function display_pets() {
+            var data = {
+                'owner_id': '@ViewData["ACC_ID"]'
+            }
+            $.ajax({
+                type: 'post',
+                url: 'display_pets',
+                data: data,
+                async: true,
+                success: function (response) {
+                    var result = JSON.parse(response);
+                    var tableBody = document.getElementById("pets_table").getElementsByTagName('tbody')[0];
+                    var is_vaccinated = '';
+                    tableBody.innerHTML = '';
+                    var count = 1;
+                    result.forEach(function (item) {
+                        var row = tableBody.insertRow();
+                        row.insertCell(0).innerHTML = count;
+                        row.insertCell(1).innerHTML = `<img style="height: 40px;
+            width: 50px;" src="/`+ item.picture + `" alt="IMAGE">`;
+                        row.insertCell(2).innerHTML += item.name;
+                        row.insertCell(3).innerHTML += item.type;
+                        row.insertCell(4).innerHTML += item.breed;
+                        row.insertCell(5).innerHTML += item.gender;
+                        if (item.is_vaccinated == 1) { is_vaccinated = 'Yes'; }
+                        else { is_vaccinated = 'No'; }
+                        row.insertCell(6).innerHTML += is_vaccinated;
+                        count++;
+                    });
+                }
+            });
+        }
+
+        function clear_fields() {
+            $('#name').val('');
+            $('#breed').val('');
+            $('#type').val('');
+            $('#gender_dropdownMenuButton').html('Select Gender');
+            $('#is_vaccinated_dropdownMenuButton').html('Yes or No');
+        }
+
+
+
+</script>

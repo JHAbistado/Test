@@ -1,0 +1,274 @@
+﻿@{
+    ViewBag.Title = "Vehicle Information";
+}
+
+@{
+    Layout = "~/Views/Shared/_Layout_Natania.cshtml";
+}
+
+<html lang="en">
+<body>
+    <!--begin::Subheader-->
+    <div class="subheader py-3 py-lg-8 subheader-transparent" id="kt_subheader">
+        <div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+            <!--begin::Info-->
+            <div class="d-flex align-items-center mr-1">
+                <!--begin::Page Heading-->
+                <div class="d-flex align-items-baseline flex-wrap mr-5">
+                    <!--begin::Page Title-->
+                    <h2 class="d-flex align-items-center text-dark font-weight-bold my-1 mr-3">Vehicle</h2>
+                    <!--end::Page Title-->
+                    <!--begin::Breadcrumb-->
+                    <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold my-2 p-0">
+                        <li class="breadcrumb-item text-muted">
+                            <a href="" class="text-muted">User</a>
+                        </li>
+                        <li class="breadcrumb-item text-muted">
+                            <a href="" class="text-muted">My Assets</a>
+                        </li>
+                        <li class="breadcrumb-item text-muted">
+                            <a href="" class="text-muted">Vehicles</a>
+                        </li>
+                    </ul>
+                    <!--end::Breadcrumb-->
+                </div>
+                <!--end::Page Heading-->
+            </div>
+            <!--end::Info-->
+            <!--begin::Toolbar-->
+            <div class="d-flex align-items-center flex-wrap">
+                <!-- Button trigger modal-->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                    <span class="svg-icon svg-icon-lg">
+                        <!--begin::Svg Icon | path:assets/media/svg/icons/Files/File.svg-->
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <polygon points="0 0 24 0 24 24 0 24" />
+                                <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                                <rect fill="#000000" x="6" y="11" width="9" height="2" rx="1" />
+                                <rect fill="#000000" x="6" y="15" width="5" height="2" rx="1" />
+                            </g>
+                        </svg>
+                        <!--end::Svg Icon-->
+                    </span>
+                    Register Vehicle
+                </button>
+
+
+                <!-- Modal-->
+                <div class="modal fade" id="exampleModalCenter" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 1000px;">
+                        <div class="modal-content">
+                            <div class="modal position-relative d-block" tabindex="-1" role="dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title text-primary font-size-h1" id="exampleModalLabel">Enter Vehicle Details</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <i aria-hidden="true" class="ki ki-close"></i>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-group mb-8">
+                                            <div class="alert alert-custom alert-default" role="alert">
+                                                <div class="alert-icon"><i class="flaticon-warning text-warning"></i></div>
+                                                <div class="alert-text">
+                                                    Please fill up the form properly
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-4 form-group">
+                                                <label>Vehicle Type*</label>
+                                                <input type="hidden" class="form-control form-control-solid" placeholder="Type" id="type" />
+                                                <div class="dropdown">
+                                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="type_dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        Select Type
+                                                    </button>
+                                                    <ul class="dropdown-menu" aria-labelledby="type_dropdownMenuButton" id="type_list">
+                                                        <li><a class="dropdown-item" href="#">Car</a></li>
+                                                        <li><a class="dropdown-item" href="#">Motor</a></li>
+                                                        <li><a class="dropdown-item" href="#">E-bike</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="col-4 form-group">
+                                                <label>Brand<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="brand" placeholder="Enter Brand" />
+                                            </div>
+                                            <div class="col-4 form-group">
+                                                <label for="exampleInputPassword1">Model<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="model" placeholder="Enter Model" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6 form-group">
+                                                <label for="exampleInputPassword1">Plate No.<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="plate_no" placeholder="Enter Plate No." />
+                                            </div>
+
+                                            <div class="col-6 mt-8 custom-file">
+                                                <input type="file" class="custom-file-input" id="orcr" />
+                                                <label class="custom-file-label" for="orcr">Upload OR/CR</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="reset" class="btn btn-primary mr-2" onclick="register_vehicle()">Register Vehicle</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end::Dropdown-->
+            </div>
+            <!--end::Toolbar-->
+        </div>
+    </div>
+    <!--end::Subheader-->
+    <!--begin::Main-->
+    <div class="container">
+        <!--begin::Table-->
+
+        <table class="table" id="vehicle_table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Brand</th>
+                    <th scope="col">Model</th>
+                    <th scope="col">Plate No.</th>
+                    <th scope="col">ORCR</th>
+                    <th scope="col">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <!--end::Table-->
+    </div>
+    <!--end::Main-->
+
+
+    <script>
+
+        function register_vehicle() {
+            var data = {
+                'owner_id': '@ViewData["ACC_ID"]',
+                'type': $('#type').val(),
+                'brand': $('#brand').val(),
+                'model': $('#model').val(),
+                'plate_number': $('#plate_no').val()
+            }
+
+            $.ajax({
+                type: 'post',
+                url: 'register_vehicle',
+                data: data,
+                async: true,
+                success: function (response) {
+                    var result = JSON.parse(response);
+                    if (result[0].result == "true") {
+                        SaveFile(result[0].v_id)
+                    }
+                    else {
+                        
+                        swal({
+                            title: 'Error',
+                            text: 'Server Error',
+                            icon: "error"
+                        }).then(
+                            function () {
+                                clear_fields()
+                            })
+                    }
+                }
+            });
+        }
+
+    function SaveFile(v_id) {
+
+      var files = document.getElementById('orcr').files;
+
+      const fileSize = files[0].size / 1024 / 1024;
+      if (!(fileSize > 20)) {
+
+          var fileuri = "";
+          var fileData = new FormData();
+          fileData.append(files[0].name, files[0]);
+          fileData.append("acc_id", @ViewData["ACC_ID"]);
+          fileData.append("v_id", v_id)
+
+          $.ajax({
+              url: '/Config/save_orcr',
+              type: 'post',
+              datatype: 'json',
+              contentType: false,
+              processData: false,
+              async: false,
+              data: fileData,
+              success: function (response) {
+                  if (response == "0") alert("Error");
+                  else {
+                      swal({
+                          title: 'Success',
+                          text: 'Thank you for registering your vehicle, please wait while we verify your vehicle details',
+                          icon: "success"
+                      })     
+                          
+                  }
+                  clear_fields()
+                  display_vehicle();
+              }
+          });
+
+      }
+      else {
+          alert("Files cannot be more than 20MB");
+      }
+
+  }
+
+        function display_vehicle() {
+            var data = {
+                owner_id: '@ViewData["ACC_ID"]'
+            }
+            $.ajax({
+                type: 'post',
+                url: 'display_vehicle',
+                data: data,
+                async: true,
+                success: function (response) {
+                    var result = JSON.parse(response);
+                    var tableBody = document.getElementById("vehicle_table").getElementsByTagName('tbody')[0];
+                    tableBody.innerHTML = '';
+                    var count = 1;
+                    result.forEach(function (item) {
+                        var row = tableBody.insertRow();
+                        row.insertCell(0).innerHTML = count;
+                        row.insertCell(1).innerHTML += item.type;
+                        row.insertCell(2).innerHTML += item.brand;
+                        row.insertCell(3).innerHTML += item.model;
+                        row.insertCell(4).innerHTML += item.plate_no;
+                        if (item.orcr !== '') { row.insertCell(5).innerHTML += `<a href="https://localhost:44316` + item.orcr + `" target="_blank">View</a>`; }
+                        else { row.insertCell(5).innerHTML += 'N/A' }
+                        if (item.status == '2') { row.insertCell(6).innerHTML += 'Pending' }
+                        else { row.insertCell(6).innerHTML += 'Approved' }
+                        count++;
+                    });
+                }
+            });
+        }
+
+        function clear_field() {
+            $('#owner_id').val('')
+            $('#plate_number').val('')
+            $('#type').val('');
+            $('#vehicle_dropdownMenuButton').html('Select Type');
+        }
+        display_vehicle();
+        $('#type_list li a').on('click', function () {
+            $('#type').val($(this).html());
+            $('#type_dropdownMenuButton').html($(this).html());
+        });
+    </script>

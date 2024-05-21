@@ -1,0 +1,180 @@
+﻿
+
+@{
+    Layout = "~/Views/Shared/_Layout_Pagekoto.cshtml";
+}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+eto ang laman ng view data @ViewData["name"]
+<br />
+<br />
+<div class=" row d-flex justify-content-center ">
+    <div class="form-group mr-10 p-7 shadow-lg rounded col-5">
+        <div class="h2">Insert</div>
+        <label>Name <span class="text-danger">*</span></label>
+        <input type="name" class="form-control mb-10" placeholder="Enter name" id="insert_name_waiter" />
+        <label>Age <span class="text-danger">*</span></label>
+        <input type="name" class="form-control mb-10" placeholder="Enter age" id="insert_age_waiter" />
+        <label>Gender <span class="text-danger">*</span></label>
+        <input type="name" class="form-control mb-10" placeholder="Enter gender" id="insert_gender_waiter" />
+        <label>Address <span class="text-danger">*</span></label>
+        <input type="name" class="form-control mb-10 text-warning" placeholder="Enter address" id="insert_address_waiter" />
+        <div class="row col-12 d-flex justify-content-end">
+            <button type="button" class="btn btn-success" onclick="Insert_waiter()">Insert</button>
+        </div>
+    </div>
+
+    <div class="form-group ml-5 p-7 shadow-lg rounded col-5">
+        <div class="h2">Update</div>
+        <label>ID <span class="text-danger">*</span></label>
+        <input type="name" class="form-control mb-10" placeholder="Enter ID" id="update_id_waiter" />
+        <label>Name <span class="text-danger">*</span></label>
+        <input type="name" class="form-control mb-10" placeholder="Enter name" id="update_name_waiter" />
+        <label>Age <span class="text-danger">*</span></label>
+        <input type="name" class="form-control mb-10" placeholder="Enter age" id="update_age_waiter" />
+        <label>Gender <span class="text-danger">*</span></label>
+        <input type="name" class="form-control mb-10" placeholder="Enter gender" id="update_gender_waiter" />
+        <label>Address <span class="text-danger">*</span></label>
+        <input type="name" class="form-control mb-10 text-warning" placeholder="Enter address" id="update_address_waiter" />
+        <div class="row col-12 d-flex justify-content-end">
+            <button type="button" class="btn btn-success" onclick="Update_waiter()">Update</button>
+        </div>
+    </div>
+</div>
+
+<div class=" row d-flex justify-content-center">
+    <div class="form-group mr-5 p-7 shadow-lg rounded col-4">
+        <div class="h2">Delete</div>
+        <div class="row">
+            <div class="col-12">
+                <label>ID <span class=" text-danger">*</span></label>
+                <input type="name" class="form-control mb-10" placeholder="Enter name" id="delete_id_waiter" />
+            </div>
+        </div>
+        <div class="row col-12 d-flex justify-content-end">
+            <button type="button" class="btn bg-danger-o-75" onclick="Delete_waiter()">Delete</button>
+        </div>
+    </div>
+</div>
+
+<div class="row d-flex justify-content-center">
+    <div class="rounded shadow-lg p-7 col-8">
+        <div class="h2">Read</div>
+        <button type="button" class="btn btn-success" onclick="Read_waiter()">Refresh</button>
+        <table class="table" id="dataTable">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Address</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+<script>
+    function Insert_waiter() {
+        var data = {
+            'insert_name_cashier': $('#insert_name_waiter').val(),
+            'insert_age_cashier': $('#insert_age_waiter').val(),
+            'insert_gender_cashier': $('#insert_gender_waiter').val(),
+            'insert_address_cashier': $('#insert_address_waiter').val()
+        };
+        $.ajax({
+            type: 'post',
+            url: 'Insert_cashier',
+            data: data,
+            async: true,
+            success: function (response) {
+                Read_waiter();
+            }
+        });
+    }
+
+    function Update_waiter() {
+        var data = {
+            'update_id_cashier': $('#update_id_waiter').val(),
+            'update_name_cashier': $('#update_name_waiter').val(),
+            'update_age_cashier': $('#update_age_waiter').val(),
+            'update_gender_cashier': $('#update_gender_waiter').val(),
+            'update_address_cashier': $('#update_address_waiter').val()
+        };
+        $.ajax({
+            type: 'post',
+            url: 'Update_cashier',
+            data: data,
+            async: true,
+            success: function (response) {
+                Read_waiter();
+            }
+        });
+    }
+
+    function Delete_waiter() {
+        var data = {
+            'delete_id_cashier': $('#delete_id_waiter').val()
+        }
+        $.ajax({
+            type: 'post',
+            url: 'Delete_cashier',
+            data: data,
+            async: true,
+            success: function (response) {
+                Read_waiter();
+            }
+        });
+    }
+
+    function Read_waiter() {
+        var data = {
+            'read_status_cashier': 1
+        }
+        $.ajax({
+            type: 'post',
+            url: 'Read_cashier',
+            data: data,
+            async: true,
+            success: function (response) {
+                var result = JSON.parse(response);
+                var tableBody = document.getElementById("dataTable").getElementsByTagName('tbody')[0];
+                tableBody.innerHTML = '';
+                result.forEach(function (item) {
+                    var row = tableBody.insertRow();
+                    row.insertCell(0).innerHTML = item.Id;
+                    row.insertCell(1).innerHTML = item.Name;
+                    row.insertCell(2).innerHTML = item.Age;
+                    row.insertCell(3).innerHTML = item.Gender;
+                    row.insertCell(4).innerHTML = item.Address;
+                });
+            }
+        });
+    }
+
+    function sign_in() {
+        var data = {
+            'email': $('#email').val(),
+            'password': $('#password').val()
+        };
+        $.ajax({
+            type: 'post',
+            url: 'sign_in',
+            data: data,
+            async: true,
+            success: function (response) {
+                alert(response);
+            }
+        });
+    }
+
+</script>
+
+

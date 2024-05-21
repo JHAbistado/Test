@@ -1,0 +1,155 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout_Natania.cshtml";
+}
+
+<div class="container">
+    <div class="card card-custom">
+        <!--begin::Form-->
+
+            <div class="card-body">
+                <h3 class="card-title text-primary ">
+                    Update Your Address
+                </h3>
+                <div class="form-group mb-8">
+                    <div class="alert alert-custom alert-default" role="alert">
+                        <div class="alert-icon"><i class="flaticon-warning text-primary"></i></div>
+                        <div class="alert-text">
+                            Fill up your address.
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4 form-group">
+                        <input type="hidden" class="form-control form-control-solid" id="phase" value="@ViewData["PHASE"]" />
+                        <label for="exampleSelect1">Phase<span class="text-danger">*</span></label>
+                        <div class="dropdown">
+                            <button class="btn btn-outline-secondary col-12 text-left" type="button" id="phase_dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                SELECT PHASE
+                            </button>
+                            <ul class="dropdown-menu col-12 border-1" aria-labelledby="phase_dropdownMenuButton" id="phase_list">
+                                <li><a class="dropdown-item" href="#">1A</a></li>
+                                <li><a class="dropdown-item" href="#">1B</a></li>
+                                <li><a class="dropdown-item" href="#">2</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                        <div class="col-4 form-group">
+                            <label for="exampleInputPassword1">Block<span class="text-danger">*</span></label>
+                            <input type="number" class="form-control" id="block" placeholder="Enter Block Number" value="@ViewData["BLOCK"]"/>
+                        </div>
+                        <div class="col-4 form-group">
+                            <label for="exampleInputPassword1">Lot<span class="text-danger">*</span></label>
+                            <input type="number" class="form-control" id="lot" placeholder="Enter Lot Number" value="@ViewData["LOT"]"/>
+                        </div>
+                    </div>
+                <div class="row">
+                    <div class="col-4 form-group">
+                        <label>Street<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" placeholder="Street" id="street" value="@ViewData["STREET"]"/>
+                    </div>
+                    <div class="col-4 form-group">
+                        <label for="exampleInputPassword1">Barangay<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="barangay" placeholder="Barangay" value="@ViewData["BARANGAY"]"/>
+                    </div>
+                    <div class="col-4 form-group">
+                        <label>City<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" placeholder="City" id="city" value="@ViewData["CITY"]"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4 form-group">
+                        <label for="exampleInputPassword1">Province<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="province" placeholder="Province" value="@ViewData["PROVINCE"]"/>
+                    </div>
+                    <div class="col-4 form-group">
+                        <label for="exampleInputPassword1">Country<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="country" placeholder="Country" value="@ViewData["COUNTRY"]"/>
+                    </div>
+                    <div class="col-4 form-group ">
+                        <label>Postal Code<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" placeholder="Zip Code" id="postal_code" value="@ViewData["POSTAL_CODE"]"/>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="reset" class="btn btn-primary mr-2" onclick="update_address()">Save</button>
+            </div>
+
+        <!--end::Form-->
+    </div>
+</div>
+
+<script>
+    $('#phase_list li a').on('click', function () {
+        $('#phase').val($(this).html());
+        $('#phase_dropdownMenuButton').html($(this).html());
+    });
+
+    var phase = '@ViewData["PHASE"]';
+    if (phase !== '') {
+        $('#phase_dropdownMenuButton').html(phase);
+    } else {
+        $('#phase_dropdownMenuButton').html('PHASE');
+    }
+
+    function update_address() {
+        var data = {
+            acc_id: '@ViewData["ACC_ID"]',
+            phase: $('#phase').val(),
+            lot: $('#lot').val(),
+            block: $('#block').val(),
+            street: $('#street').val(),
+            barangay: $('#barangay').val(),
+            city: $('#city').val(),
+            province: $('#province').val(),
+            country: $('#country').val(),
+            postal_code: $('#postal_code').val()
+        }
+
+        $.ajax({
+            type: 'post',
+            url: 'update_address',
+            data: data,
+            async: true,
+            success: function (response) {
+                var result = JSON.parse(response)
+                if (result[0].result == "true") {
+                    swal({
+                        title: 'Success',
+                        text: 'Your Information is Updated',
+                        timer: 3000,
+                        icon: "success",
+                        button: false
+                    }).then(
+                        function () {
+                            get_details();
+                        }
+                    )
+                }
+                else {
+                    swal({
+                        title: 'Error',
+                        text: 'Server Error',
+                        timer: 3000,
+                        icon: "error",
+                        button: false
+                    })
+                }
+            }
+        });
+    }
+    function get_details() {
+    data = { 'acc_id': '@ViewData["ACC_ID"]' }
+    $.ajax({
+        type: 'post',
+        url: 'get_details',
+        data: data,
+        async: true,
+        success: function (response) {
+
+            /*window.location.href = 'natania_personal_information_page'*/
+        }
+    })
+}
+</script>

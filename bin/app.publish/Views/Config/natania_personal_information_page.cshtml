@@ -1,0 +1,235 @@
+﻿@{
+    ViewBag.Title = "Personal Information";
+}
+
+@{
+    Layout = "~/Views/Shared/_Layout_Natania.cshtml";
+}
+
+
+<div class="container">
+    <div class="card card-custom">
+        <!--begin::Form-->
+        <div class="card-body">
+            <h3 class="card-title text-primary">
+                Update Your Personal Information
+            </h3>
+            <div class="form-group mb-8">
+                <div class="alert alert-custom alert-default" role="alert">
+                    <div class="alert-icon"><i class="flaticon-warning text-warning"></i></div>
+                    <div class="alert-text">
+                        Please complete your information below.
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4 form-group">
+                    <label>First Name<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" placeholder="First Name" id="first_name" value="@ViewData["FIRST_NAME"]" />
+                </div>
+                <div class="col-4 form-group">
+                    <label for="exampleInputPassword1">Middle Name<span class="text-danger"></span></label>
+                    <input type="text" class="form-control" placeholder="Middle Name" id="middle_name" value="@ViewData["MIDDLE_NAME"]" />
+                </div>
+                <div class="col-4 form-group">
+                    <label for="exampleInputPassword1">Last Name<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="last_name" placeholder="Last Name" value="@ViewData["LAST_NAME"]" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4 form-group">
+                    <label>Suffix Name</label>
+                    <input type="email" class="form-control" placeholder="Suffix Name" id="suffix_name" value="@ViewData["SUFFIX_NAME"]" />
+                </div>
+                <div class="col-4 form-group">
+                    <label for="exampleInputPassword1">Age<span class="text-danger">*</span></label>
+                    <input type="number" class="form-control" id="age" placeholder="Age (Years Old)" value="@ViewData["AGE"]" />
+                </div>
+                <div class="col-4 form-group">
+                    <input type="hidden" class="form-control form-control-solid" placeholder="Enter gender" id="gender" value="@ViewData["GENDER"]" />
+                    <label for="exampleSelect1">Gender<span class="text-danger">*</span></label>
+                    <div class="dropdown">
+                        <button class="btn btn-outline-secondary col-12 text-left" type="button" id="gender_dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            SELECT GENDER
+                        </button>
+                        <ul class="dropdown-menu col-12 text-center" aria-labelledby="gender_dropdownMenuButton" id="gender_list">
+                            <li><a class="dropdown-item text-center" href="#">Male</a></li>
+                            <li><a class="dropdown-item text-center" href="#">Female</a></li>
+                            <li><a class="dropdown-item text-center" href="#">Other</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4 form-group">
+                    <label>Phone Number<span class="text-danger">*</span></label>
+                    <div class="input-group">
+                        <span class="input-group-text" id="basic-addon1">+63</span>
+                        <input class="form-control" placeholder="Enter Your Phone Number" type="number" id="phone_no" value="@ViewData["phone_no"]" />
+                    </div>
+                </div>
+                <div class="col-4 form-group">
+                    <label>Email<span class="text-danger">*</span></label>
+                    <input type="email" class="form-control" placeholder="Enter Your Email" id="email" value="@ViewData["email"]" />
+                    <span class="form-text text-muted">We'll never share your email with anyone else.</span>
+                </div>
+            </div>
+            <div class="row">
+
+            </div>
+        </div>
+        <div class="card-footer">
+            <button type="button" class="btn btn-primary mr-2" onclick="compare_email()">Save</button>
+            
+        </div>
+        <!--end::Form-->
+    </div>
+
+
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+
+    $('#gender_list li a').on('click', function () {
+        $('#gender').val($(this).html());
+        $('#gender_dropdownMenuButton').html($(this).html());
+    });
+
+    var gender = '@ViewData["GENDER"]';
+    if (gender !== '') {
+        $('#gender_dropdownMenuButton').html(gender);
+    } else {
+        $('#gender_dropdownMenuButton').html('SELECT GENDER');
+}
+
+    function compare_email() {
+        var data = {
+            'id': '@ViewData["ACC_ID"]',
+            'email': $('#email').val()
+        }
+        $.ajax({
+            type: 'post',
+            url: 'compare_email',
+            data: data,
+            async: true,
+            success: function (response) {
+                var result = JSON.parse(response);
+                if (result[0].result == "true") {
+                    update_details();
+                }
+                else {
+                    check_email();
+                }
+            }
+        });
+    }
+
+    function check_email() {
+        var data = {
+            'email': $('#email').val()
+        };
+        $.ajax({
+            type: 'post',
+            url: 'check_email',
+            data: data,
+            async: true,
+            success: function (response) {
+                var result = JSON.parse(response);
+
+                if (result == "true") {
+                    alert("email is already existing");
+                    swal({
+                        title: 'Error',
+                        text: 'Email is existing',
+                        timer: 3000,
+                        icon: "error",
+                        button: false
+                    })
+                }
+                else {
+                    update_details();
+                }
+
+            }
+        });
+
+    }
+
+
+
+    function update_details() {
+        var data = {
+            'account_id': '@ViewData["ACC_ID"]',
+            'first_name': $('#first_name').val(),
+            'last_name': $('#last_name').val(),
+            'middle_name': $('#middle_name').val(),
+            'suffix_name': $('#suffix_name').val(),
+            'email': $('#email').val(),
+            'age': $('#age').val(),
+            'gender': $('#gender').val(),
+            'phone_no': $('#phone_no').val()
+        }
+        $.ajax({
+            type: 'post',
+            url: 'update_details',
+            data: data,
+            async: true,
+            success: function (response) {
+                var result = JSON.parse(response);
+                if (result[0].result == "success") {
+                    swal({
+                        title: 'Success',
+                        text: 'Your Information is Updated',
+                        timer: 3000,
+                        icon: "success",
+                        button: false
+                    }).then(
+                        function () {
+                            get_details();
+                            
+                        }
+                    )
+                    
+                }
+                
+                
+            }
+        });
+    }
+
+    function get_details() {
+        data = { 'acc_id': '@ViewData["ACC_ID"]' }
+        $.ajax({
+            type: 'post',
+            url: 'get_details',
+            data: data,
+            async: true,
+            success: function (response) {
+
+                /*window.location.href = 'natania_personal_information_page'*/
+            }
+        })
+    }
+
+    function clear_fields() {
+
+        var elements = document.getElementsByTagName("input");
+        for (var i = 0; i < elements.length; i++) {
+            if (elements[i].type == "text") {
+                elements[i].value = "";
+            }
+        }
+        var elements = document.getElementsByTagName("input");
+        for (var i = 0; i < elements.length; i++) {
+            if (elements[i].type == "number") {
+                elements[i].value = "";
+            }
+        }
+        $('#email').val('');
+        $('#gender_dropdownMenuButton').html('Select Gender');
+
+    }
+
+    
+
+</script>

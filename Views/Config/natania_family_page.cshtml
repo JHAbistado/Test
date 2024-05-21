@@ -1,0 +1,262 @@
+﻿@{
+    ViewBag.Title = "Members";
+}
+
+@{
+    Layout = "~/Views/Shared/_Layout_Natania.cshtml";
+}
+
+    <!--begin::Subheader-->
+    <div class="subheader py-3 py-lg-8 subheader-transparent" id="kt_subheader">
+        <div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+            <!--begin::Info-->
+            <div class="d-flex align-items-center mr-1">
+                <!--begin::Page Heading-->
+                <div class="d-flex align-items-baseline flex-wrap mr-5">
+                    <!--begin::Page Title-->
+                    <h2 class="d-flex align-items-center text-dark font-weight-bold my-1 mr-3">Family Members</h2>
+                    <!--end::Page Title-->
+                    <!--begin::Breadcrumb-->
+                    <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold my-2 p-0">
+                        <li class="breadcrumb-item text-muted">
+                            <a href="" class="text-muted">User</a>
+                        </li>
+                        <li class="breadcrumb-item text-muted">
+                            <a href="" class="text-muted">My Family</a>
+                        </li>
+                        <li class="breadcrumb-item text-muted">
+                            <a href="" class="text-muted">Family Members</a>
+                        </li>
+                    </ul>
+                    <!--end::Breadcrumb-->
+                </div>
+                <!--end::Page Heading-->
+            </div>
+            <!--end::Info-->
+            <!--begin::Toolbar-->
+            <div class="d-flex align-items-center flex-wrap">
+                <!-- Button trigger modal-->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                    <span class="svg-icon svg-icon-lg">
+                        <!--begin::Svg Icon | path:assets/media/svg/icons/Files/File.svg-->
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <polygon points="0 0 24 0 24 24 0 24" />
+                                <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                                <rect fill="#000000" x="6" y="11" width="9" height="2" rx="1" />
+                                <rect fill="#000000" x="6" y="15" width="5" height="2" rx="1" />
+                            </g>
+                        </svg>
+                        <!--end::Svg Icon-->
+                    </span>
+                    Add Member
+                </button>
+
+
+
+                <!-- Modal-->
+                <div class="modal fade" id="exampleModalCenter" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 1000px;">
+                        <div class="modal-content">
+                            <div class="modal position-relative d-block" tabindex="-1" role="dialog">
+                                <div>
+                                    <div class="modal-content">
+                                        <div class="card-body">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Enter Family Member Details</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <i aria-hidden="true" class="ki ki-close"></i>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="alert alert-custom alert-default" role="alert">
+                                                    <div class="alert-icon"><i class="flaticon-warning text-primary"></i></div>
+                                                    <div class="alert-text">
+                                                        Please fill up the form properly.
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-4 form-group">
+                                                        <label>First Name<span class="text-danger">*</span></label>
+                                                        <input type="text" class="form-control" placeholder="First Name" id="first_name" />
+                                                    </div>
+                                                    <div class="col-4 form-group">
+                                                        <label for="exampleInputPassword1">Middle Name</label>
+                                                        <input type="text" class="form-control" id="middle_name" placeholder="Middle Name" />
+                                                    </div>
+                                                    <div class="col-4 form-group">
+                                                        <label for="exampleInputPassword1">Last Name<span class="text-danger">*</span></label>
+                                                        <input type="text" class="form-control" id="last_name" placeholder="Last Name" />
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-4 form-group">
+                                                        <label>Suffix Name</label>
+                                                        <input type="email" class="form-control" placeholder="Suffix Name" id="suffix_name" />
+                                                    </div>
+                                                    <div class="col-4 form-group">
+                                                        <label for="exampleInputPassword1">Age<span class="text-danger">*</span></label>
+                                                        <input type="number" class="form-control" id="age" placeholder="Age" />
+                                                    </div>
+                                                    <div class="col-4 form-group">
+                                                        <label>Gender*</label>
+                                                        <input type="hidden" class="form-control form-control-solid" placeholder="Enter gender" id="gender" />
+                                                        <div class="dropdown">
+                                                            <button class="btn btn-outline-secondary col-12 text-left" type="button" id="gender_dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                Select Gender
+                                                            </button>
+                                                            <ul class="dropdown-menu col-12 border-1" aria-labelledby="gender_dropdownMenuButton" id="gender_list">
+                                                                <li><a class="dropdown-item" href="#">Male</a></li>
+                                                                <li><a class="dropdown-item" href="#">Female</a></li>
+                                                                <li><a class="dropdown-item" href="#">Other</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <label>Relationship*</label>
+                                                        <input type="hidden" class="form-control form-control-solid" placeholder="Enter gender" id="relationship" />
+                                                        <div class="dropdown">
+                                                            <button class="btn btn-outline-secondary col-12 text-left" type="button" id="relationship_dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                Select Relationship
+                                                            </button>
+                                                            <ul class="dropdown-menu pre-scrollable max-h-150px col-12 border-1" aria-labelledby="relationship_dropdownMenuButton" id="relationship_list">
+                                                                <li><a class="dropdown-item" href="#">Son</a></li>
+                                                                <li><a class="dropdown-item" href="#">Daughter</a></li>
+                                                                <li><a class="dropdown-item" href="#">Mother</a></li>
+                                                                <li><a class="dropdown-item" href="#">Father</a></li>
+                                                                <li><a class="dropdown-item" href="#">Brother</a></li>
+                                                                <li><a class="dropdown-item" href="#">Sister</a></li>
+                                                                <li><a class="dropdown-item" href="#">Helper</a></li>
+                                                                <li><a class="dropdown-item" href="#">Guardian</a></li>
+                                                                <li><a class="dropdown-item" href="#">Extended Family</a></li>
+                                                                <li><a class="dropdown-item" href="#">Other</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="add_family_member()">Add Member</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end::Dropdown-->
+            </div>
+            <!--end::Toolbar-->
+        </div>
+    </div>
+    <!--end::Subheader-->
+    <!--begin::Main-->
+    <div class="container">
+        <!--begin::Table-->
+
+        <table class="table" id="family_member_table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Gender</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <!--end::Table-->
+    </div>
+    <!--end::Main-->
+
+<script>
+
+    display_family_member();
+    $('#gender_list li a').on('click', function () {
+        $('#gender').val($(this).html());
+        $('#gender_dropdownMenuButton').html($(this).html());
+    });
+    
+    $('#relationship_list li a').on('click', function () {
+        $('#relationship').val($(this).html());
+        $('#relationship_dropdownMenuButton').html($(this).html());
+    });
+
+    function check_response(response) {
+        var result = '';
+        if (response.length > 2) {
+            result = 'SUCCESS';
+        }
+        else {
+            result = 'FAILED';
+        }
+        return result;
+    }
+
+    function add_family_member() {
+        var data = {
+            'owner_id': '@ViewData["ACC_ID"]',
+            'first_name': $('#first_name').val(),
+            'last_name': $('#last_name').val(),
+            'middle_name': $('#middle_name').val(),
+            'suffix_name': $('#suffix_name').val(),
+            'age': $('#age').val(),
+            'gender': $('#gender').val(),
+        }
+
+        $.ajax({
+            type: 'post',
+            url: 'add_family_member',
+            data: data,
+            async: true,
+            success: function (response) {
+                var result = check_response(response);
+                alert(result);
+                clear_field();
+                display_family_member();
+            }
+        });
+    }
+
+    function display_family_member() {
+        var data = {
+            'owner_id': '@ViewData["ACC_ID"]'
+        }
+        $.ajax({
+            type: 'post',
+            url: 'display_family_member',
+            data: data,
+            async: true,
+            success: function (response) {
+                var result = JSON.parse(response);
+                var tableBody = document.getElementById("family_member_table").getElementsByTagName('tbody')[0];
+                tableBody.innerHTML = '';
+                var count = 1;
+                result.forEach(function (item) {
+                    var row = tableBody.insertRow();
+                    row.insertCell(0).innerHTML = count;
+                    row.insertCell(1).innerHTML += item.first_name + ` ` + item.last_name + ` ` + item.suffix_name;
+                    row.insertCell(2).innerHTML += item.age;
+                    row.insertCell(3).innerHTML += item.gender;
+                    count++;
+                });
+            }
+        });
+    }
+
+    function clear_field() {
+        $('#owner_id').val('')
+        $('#first_name').val('')
+        $('#last_name').val('')
+        $('#middle_name').val('')
+        $('#suffix').val('')
+        $('#age').val('')
+        $('#gender').val('')
+        $('#gender_dropdownMenuButton').html('Select Gender');
+    }
+    
+</script>

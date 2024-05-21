@@ -1,0 +1,114 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_Natania.cshtml";
+}
+
+<div class="mt-10 container" style="max-width: 700px;">
+    <div class="card-custom" style="max-width: 700px;">
+            <div class="card-body">
+                <h3 class="card-title text-primary">
+                    Change Your Password
+                </h3>
+                <div class="form-group mb-8">
+                    <div class="alert alert-custom alert-default" role="alert">
+                        <div class="alert-icon"><i class="flaticon-warning text-primary"></i></div>
+                        <div class="alert-text">
+                            To change your password, please requst a link by clicking the button below.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="reset" class="col-12 btn btn-primary mr-2" onclick="request_link()">Request</button>
+            </div>
+    </div>
+</div>
+
+<script>
+    function request_link() {
+        if (check_if_token_exist("") == "true") {
+            send_reset_link();
+        }
+    }
+
+    function check_if_token_exist(returned) {
+        var sign = /^(([^<>()[\]\\.,;:\s@@\"]+(\.[^<>()[\]\\.,;:\s@@\"]+)*)|(\".+\"))@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        var email = '@ViewData["EMAIL"]';
+        var returned = "";
+        if (email.match(sign)) {
+            var data = {
+                'email': email
+            };
+            $.ajax({
+                type: 'post',
+                url: 'check_token',
+                data: data,
+                async: false,
+                success: function (response) {
+                    var result = JSON.parse(response);
+                    if (result[0].result == "true") {
+                        swal({
+                            title: 'Warning',
+                            text: 'Email already sent',
+                            icon: "warning",
+                            timer: 3000,
+                            button: false
+                        })
+                        returned = "false";
+                    }
+                    else {
+                        returned = "true";
+                    }
+                }
+            })
+
+        }
+        else {
+            returned = "false";
+        }
+        return returned;
+    }
+
+    function send_reset_link() {
+        var rand = function () {
+            return Math.random().toString(36).substr(2); // remove `0.`
+        };
+
+        var token = function () {
+            return rand() + rand(); // to make it longer
+        };
+
+        var email = '@ViewData["EMAIL"]';
+
+        var data = {
+            'email': email,
+            'token': token()
+        }
+        $.ajax({
+            type: 'post',
+            url: 'send_reset_link',
+            data: data,
+            async: true,
+            success: function (response) {
+                var result = JSON.parse(response);
+                if (result[0].result == "true") {
+                    swal({
+                        title: 'Success',
+                        text: 'Reset link was sent to your email',
+                        icon: "success",
+                        timer: 3000,
+                        button: false
+                    })
+                }
+                else {
+                    swal({
+                        title: 'Error',
+                        text: 'Server Error',
+                        icon: "error",
+                        timer: 3000,
+                        button: false
+                    })
+                }
+            }
+        })
+    }
+</script>

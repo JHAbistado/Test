@@ -1,0 +1,32 @@
+﻿<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    function verify_token() {
+        var token = new URLSearchParams(window.location.search).get("token");
+        var email = new URLSearchParams(window.location.search).get("email");
+        var data = {
+            'email': email,
+            'token': token
+        }
+        $.ajax({
+            type: 'post',
+            url: 'verify_token',
+            data: data,
+            async: true,
+            success: function (response) {
+                var result = JSON.parse(response);
+                if (result[0].title == "true") {
+                    alert("Success");
+                    window.location.href = 'natania_signin_page';
+                }
+                else {
+                    alert("Invalid Link")
+                }
+                
+            }
+        });
+        
+
+    }
+
+    verify_token();
+</script>

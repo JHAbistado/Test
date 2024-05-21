@@ -10,7 +10,9 @@ namespace MHD.FetchConfig
 {
     public class Connection
     {
-        public DataTable Start(string procedurename, string[][] paramsbindings)
+
+     
+        public DataTable StartSEPH(string procedurename, string[][] paramsbindings)
         {
             try
             {

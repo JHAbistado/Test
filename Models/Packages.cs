@@ -17,6 +17,8 @@ namespace MHD.Models
         public string date_added { get; set; }
         public string date_modified { get; set; }
         public string package_updator { get; set; }
+        public string package_location{ get; set; }
+        public string package_location_id{ get; set; }
 
     }
 
