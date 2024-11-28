@@ -1,0 +1,146 @@
+﻿
+@{
+    ViewBag.Title = "Test";
+}
+
+<h2>Test</h2>
+<input type="number" id="a" placeholder="a"/>
+<input type="number" id="b" placeholder="b"/>
+<input type="number" id="c" placeholder="c"/>
+<button onclick="add()">Add</button>
+<br />
+<hr />
+<input type="text" id="first_name" placeholder="First Name" />
+<input type="text" id="last_name" placeholder="Last Name" />
+<input type="text" id="suffix_name" placeholder="Suffix Name" />
+<input type="number" id="age" placeholder="Age" />
+<button onclick="add_data()">Add Data</button>
+<br />
+<hr />
+<button onclick="display_data()">Display Data</button>
+<table style="border: solid" id="table_users_data">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Suffix Name</th>
+            <th>Age</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+    </tbody>
+</table>
+
+<br />
+<hr />
+<input type="number" id="id" placeholder="Enter ID"/>
+<input type="text" id="update_first_name" placeholder="Enter First Name"/>
+<input type="number" id="update_age" placeholder="Enter Age"/>
+<button onclick="update_data()">Update Data</button>
+
+<br />
+<hr />
+<input type="number" id="delete_id" placeholder="Enter ID"/>
+<button onclick="delete_data()">Delete Data</button>
+
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+<script>
+    /*FOR DELETE*/
+    function delete_data() {
+        var data = {
+            'id': $("#delete_id").val()
+        }
+        $.ajax({
+            type: 'post',
+            url: 'delete_data',
+            data: data,
+            async: true,
+            success: function (response) {
+                alert(response);
+                display_data();
+            }
+        })
+    }
+
+    /*FOR UPDATE*/
+    function update_data() {
+        var data = {
+            'id': $("#id").val(),
+            'first_name': $("#update_first_name").val(),
+            'age': $("#update_age").val()
+        }
+        $.ajax({
+            type: 'post',
+            url: 'update_data',
+            data: data,
+            async: true,
+            success: function (response) {
+                alert(response);
+                display_data();
+            }
+        })
+    }
+
+    /*FOR ADD*/
+    function add(){
+        var data = {
+            'cashier_a': $("#a").val(),
+            'cashier_b': $("#b").val(),
+            'cashier_c': $("#c").val()
+        }
+
+        $.ajax({
+            type: 'post',
+            url: 'cashier_test',
+            async: true,
+            data: data,
+            success: function (response) {
+                alert(response);
+            }
+        })
+    }
+
+    function add_data() {
+        var data = {
+            'cash_first_name': $('#first_name').val(),
+            'cash_last_name': $('#last_name').val(),
+            'cash_suffix_name': $('#suffix_name').val(),
+            'cash_age': $('#age').val()
+        }
+
+        $.ajax({
+            type: 'post',
+            url: 'cashier_add_data',
+            data: data,
+            async: true,
+            success: function (response) {
+                alert(response);
+            }
+        })
+    }
+
+    function display_data() {
+        $.ajax({
+            type: 'get',
+            url: 'display_data',
+            async: true,
+            success: function (response) {
+                var result = JSON.parse(response);
+                var tableBody = document.getElementById("table_users_data").getElementsByTagName('tbody')[0];
+                tableBody.innerHTML = '';
+                result.forEach(function (item) {
+                    var row = tableBody.insertRow();
+                    row.insertCell(0).innerHTML = item.id;
+                    row.insertCell(1).innerHTML = item.first_name;
+                    row.insertCell(2).innerHTML = item.last_name;
+                    row.insertCell(3).innerHTML = item.suffix_name;
+                    row.insertCell(4).innerHTML = item.age;
+                });
+            }
+        })
+    }
+    
+</script>
+

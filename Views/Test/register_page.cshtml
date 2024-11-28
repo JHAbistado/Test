@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewBag.Title = "register_page";
+}
+
+<h2>Register Page</h2>
+
+<br />
+<input type="text" id="first_name" placeholder="First Name"/><br />
+<input type="text" id="last_name" placeholder="Last Name" /><br />
+<input type="text" id="suffix_name" placeholder="Suffix Name" /><br />
+<input type="number" id="age" placeholder="Age" /><br />
+<input type="text" id="username" placeholder="Username" /><br />
+<input type="password" id="password" placeholder="Password" /><br />
+<button onclick="check_username()">Register</button>
+
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+<script>
+
+    function check_username() {
+        var data = {
+            'username': $("#username").val()
+        }
+        $.ajax({
+            type: 'post',
+            url: 'check_username',
+            data: data,
+            async: true,
+            success: function (response) {
+                var result = JSON.parse(response);
+                if (result[0].result == "0") {
+                    register();
+                }
+                else {
+                    alert("Error: Username Exist");
+                }
+                
+            }
+        })
+    }
+
+    function register() {
+        var data = {
+            'first_name': $("#first_name").val(),
+            'last_name': $("#last_name").val(),
+            'suffix_name': $("#suffix_name").val(),
+            'age': $("#age").val(),
+            'username': $("#username").val(),
+            'password': $("#password").val()
+        }
+
+        $.ajax({
+            type: 'post',
+            url: 'register_account',
+            data: data,
+            async: true,
+            success: function (response) {
+                alert(response);
+            }
+        })
+    }
+</script>

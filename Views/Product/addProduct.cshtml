@@ -1,0 +1,254 @@
+﻿
+@{
+    ViewBag.Title = "addProduct";
+}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <base href="../../">
+    <meta charset="utf-8" />
+    <title>Add Product</title>
+    <meta name="description" content="Page with empty content" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="canonical" href="https://goodshepherd.com.ph" />
+    <!--begin::Fonts-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+    <!--end::Fonts-->
+    <!--begin::Page Vendors Styles(used by this page)-->
+    <link href="~/metronic/dist/assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
+    <!--end::Page Vendors Styles-->
+    <!--begin::Global Theme Styles(used by all pages)-->
+    <link href="~/assets/css/styles_new_age.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/css/style.css" rel="stylesheet" type="text/css" />
+    <script src="~/assets/javascript/scripts_new_age.js"></script>
+    <link href="~/metronic/dist/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="~/metronic/dist/assets/plugins/custom/prismjs/prismjs.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="~/metronic/dist/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+    <!--end::Global Theme Styles-->
+    <!--begin::Layout Themes(used by all pages)-->
+    <!--end::Layout Themes-->
+    <link rel="shortcut icon" href="~/assets/images/GSfavicon.png" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+    <!--=============== BOXICONS ===============-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+
+    <!--=============== CSS ===============-->
+    <link rel="stylesheet" href="~/assets/css/style_dan.css">
+    <!--end::Global Theme Styles-->
+    <style>
+        .table td, .table th {
+            padding: 0.75rem;
+            vertical-align: middle;
+            border-top: 1px solid #EBEDF3;
+        }
+
+        .nav {
+            justify-content: normal;
+        }
+    </style>
+</head>
+<body>
+    <div class="d-flex container">
+        <div class="container mt-4">
+            <!--begin::Subheader-->
+            <div class="subheader py-3 py-lg-8 subheader-transparent" id="kt_subheader">
+                <div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+                    <!--begin::Info-->
+                    <div class="d-flex align-items-center mr-1">
+                        <!--begin::Page Heading-->
+                        <div class="d-flex align-items-baseline flex-wrap mr-5">
+                            <!--begin::Page Title-->
+                            <!--end::Page Title-->
+                        </div>
+                        <!--end::Page Heading-->
+                    </div>
+                    <!--end::Info-->
+                </div>
+            </div>
+            <!--end::Subheader-->
+            <!--begin::Entry-->
+            <div class="row">
+                <div class="col-lg-12 d-flex">
+                    <div class="card card-custom">
+                        <div class="alert alert-custom alert-default py-10" role="alert">
+                            <span class="mr-5 svg-icon svg-icon-primary svg-icon-2x">
+                                <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo5\dist/../src/media/svg/icons\Code\Warning-1-circle.svg-->
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24" />
+                                        <circle fill="#000000" opacity="0.3" cx="12" cy="12" r="10" />
+                                        <rect fill="#000000" x="11" y="7" width="2" height="8" rx="1" />
+                                        <rect fill="#000000" x="11" y="16" width="2" height="2" rx="1" />
+                                    </g>
+                                </svg><!--end::Svg Icon-->
+                            </span>
+                            <div class="alert-text">
+                                Please fill out the form below with your personal details. Make sure to provide accurate contact information so we can reach you with relevant updates. Once completed, click “Submit.”
+                            </div>
+                        </div>
+                        <div class="pt-15">
+                            <div class="container px-10 pt-7 pb-4">
+                                <div class="row">
+                                    <div class="col-6 form-group">
+                                        <label>Product Name</label>
+                                        <input type="text" class="form-control" placeholder="Product Name" id="html_product_name" />
+                                    </div>
+                                    <div class="col-6 form-group">
+                                        <label>Product Price</label>
+                                        <input type="number" class="form-control" placeholder="Product Price" id="html_product_price" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 form-group">
+                                        <label>Product Description</label>
+                                        <textarea rows="3" class="form-control" placeholder="Product Description" id="html_product_description"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="text-center">
+                                    <div class="mt-20">
+                                        <div class="">
+                                            <a class="btn btn-primary px-7" onclick="addProduct()">Add Product</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container px-10 pt-7 pb-4">
+                                <div class="row">
+                                    <div class="col-6 form-group">
+                                        <label>Product Category Name</label>
+                                        <input type="text" class="form-control" placeholder="Product Category Name" id="html_pc_name" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 form-group">
+                                        <label>Product Category Description</label>
+                                        <textarea rows="3" class="form-control" placeholder="Product Category Description" id="html_pc_description"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="text-center">
+                                    <div class="mt-20">
+                                        <div class="">
+                                            <a class="btn btn-primary px-7" onclick="addProductCategory()">Add Product Category</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-40 mt-20">
+                <div class="col-lg-12 d-flex">
+                    <div class="card card-custom">
+                        <div class="alert alert-custom alert-default py-10" role="alert">
+                            <span class="mr-5 svg-icon svg-icon-primary svg-icon-2x">
+                                <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\legacy\metronic\theme\html\demo5\dist/../src/media/svg/icons\Code\Warning-1-circle.svg-->
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24" />
+                                        <circle fill="#000000" opacity="0.3" cx="12" cy="12" r="10" />
+                                        <rect fill="#000000" x="11" y="7" width="2" height="8" rx="1" />
+                                        <rect fill="#000000" x="11" y="16" width="2" height="2" rx="1" />
+                                    </g>
+                                </svg><!--end::Svg Icon-->
+                            </span>
+                            <div class="alert-text">
+                                Please fill out the form below with your personal details. Make sure to provide accurate contact information so we can reach you with relevant updates. Once completed, click “Submit.”
+                            </div>
+                        </div>
+                        <div class="pt-15">
+                            <div class="container px-10 pt-7 pb-4">
+                                <div class="row">
+                                    <div class="col-6 form-group">
+                                        <label>Product ID</label>
+                                        <input type="number" class="form-control" placeholder="Product Sub Category ID" id="html_pc_id" />
+                                    </div>
+                                    <div class="col-6 form-group">
+                                        <label>Product Sub Category Name</label>
+                                        <input type="text" class="form-control" placeholder="Product Sub Category Name" id="html_psc_name" />
+                                    </div>
+                                </div>
+                                <div class="row">
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 form-group">
+                                        <label>Product Sub Category Description</label>
+                                        <textarea rows="3" class="form-control" placeholder="Product Sub Category Description" id="html_psc_description"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="text-center">
+                                    <div class="mt-20">
+                                        <div class="">
+                                            <a class="btn btn-primary px-7" onclick="addProductSubCategory()">Add Product Category</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pt-15">
+                            <div class="container px-10 pt-7 pb-4">
+                                <div class="row">
+                                    <div class="col-6 form-group">
+                                        <label>Product Sub Category ID</label>
+                                        <input type="number" class="form-control" placeholder="Product Sub Category ID" id="html_prod_sub_cat_id" />
+                                    </div>
+                                    <div class="col-6 form-group">
+                                        <label>Product Name</label>
+                                        <input type="text" class="form-control" placeholder="Product Name" id="html_prod_name" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 form-group">
+                                        <label>Product Description</label>
+                                        <textarea rows="3" class="form-control" placeholder="Product Description" id="html_prod_description"></textarea>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="mt-20">
+                                        <div class="">
+                                            <a class="btn btn-primary px-7" onclick="addProduct()">Add Product Category</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end::Entry-->
+    <script>var HOST_URL = "https://goodshepherd.com.ph";</script>
+    <!--begin::Global Config(global config for global JS scripts)-->
+    <script>var KTAppSettings = { "breakpoints": { "sm": 576, "md": 768, "lg": 992, "xl": 1200, "xxl": 1200 }, "colors": { "theme": { "base": { "white": "#ffffff", "primary": "#6993FF", "secondary": "#E5EAEE", "success": "#1BC5BD", "info": "#8950FC", "warning": "#FFA800", "danger": "#F64E60", "light": "#F3F6F9", "dark": "#212121" }, "light": { "white": "#ffffff", "primary": "#E1E9FF", "secondary": "#ECF0F3", "success": "#C9F7F5", "info": "#EEE5FF", "warning": "#FFF4DE", "danger": "#FFE2E5", "light": "#F3F6F9", "dark": "#D6D6E0" }, "inverse": { "white": "#ffffff", "primary": "#ffffff", "secondary": "#212121", "success": "#ffffff", "info": "#ffffff", "warning": "#ffffff", "danger": "#ffffff", "light": "#464E5F", "dark": "#ffffff" } }, "gray": { "gray-100": "#F3F6F9", "gray-200": "#ECF0F3", "gray-300": "#E5EAEE", "gray-400": "#D6D6E0", "gray-500": "#B5B5C3", "gray-600": "#80808F", "gray-700": "#464E5F", "gray-800": "#1B283F", "gray-900": "#212121" } }, "font-family": "Poppins" };</script>
+    <!--end::Global Config-->
+    <!--begin::Global Theme Bundle(used by all pages)-->
+    <script src="~/metronic/dist/assets/plugins/global/plugins.bundle.js"></script>
+    <script src="~/metronic/dist/assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
+    <script src="~/metronic/dist/assets/js/scripts.bundle.js"></script>
+
+    <!--end::Global Theme Bundle-->
+    <!--begin::Page Vendors(used by this page)-->
+    <script src="~/metronic/dist/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
+    <script src="//maps.google.com/maps/api/js?key=AIzaSyBTGnKT7dt597vo9QgeQ7BFhvSRP4eiMSM"></script>
+    <script src="~/metronic/dist/assets/plugins/custom/gmaps/gmaps.js"></script>
+    <!--end::Page Vendors-->
+    <!--begin::Page Scripts(used by this page)-->
+    <script src="~/metronic/dist/assets/js/pages/widgets.js"></script>
+    <script src="~/Scripts/Product/addProduct.js"></script>
+    <!--end::Page Scripts-->
+</body>
+</html>
+
+
+
+
+
+

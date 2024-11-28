@@ -1,0 +1,161 @@
+﻿@{
+    ViewBag.Title = "viewProduct";
+}
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <base href="../../">
+    <meta charset="utf-8" />
+    <title>View Product</title>
+    <meta name="description" content="Page with empty content" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="canonical" href="https://goodshepherd.com.ph" />
+    <!--begin::Fonts-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+    <!--end::Fonts-->
+    <!--begin::Page Vendors Styles(used by this page)-->
+    <link href="~/metronic/dist/assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
+    <!--end::Page Vendors Styles-->
+    <!--begin::Global Theme Styles(used by all pages)-->
+    <link href="~/metronic/dist/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="~/metronic/dist/assets/plugins/custom/prismjs/prismjs.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="~/metronic/dist/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+    <!--end::Global Theme Styles-->
+    <!--begin::Layout Themes(used by all pages)-->
+    <!--end::Layout Themes-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+    <!--=============== BOXICONS ===============-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+
+    <!--end::Global Theme Styles-->
+    <style>
+        .table td, .table th {
+            padding: 0.75rem;
+            vertical-align: middle;
+            border-top: 1px solid #EBEDF3;
+        }
+
+        .nav {
+            justify-content: normal;
+        }
+    </style>
+</head>
+<body>
+    
+    <!--end::Subheader-->
+    <!--begin::Entry-->
+    <div class="d-flex flex-column-fluid">
+        <!--begin::Container-->
+        <div class="mt-5 container">
+            <!--begin::Card-->
+            <div class="card card-custom card-border">
+                <div class="card-header flex-wrap border-0 pt-6 pb-0">
+                    <div class="card-title">
+                        <h3 class="card-label">
+                            Product Table
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <!--begin: Datatable-->
+                    <h3 class="card-label">
+                        Product Table
+                    </h3>
+                    <div class="align-center table-responsive-md">
+                        <table class="table table-green table-hover" style="vertical-align: middle;" id="productTable">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Sub Category Id</th>
+                                    <th scope="col">Sub Category Name</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--end: Datatable-->
+                </div>
+
+                <div class="card-body">
+                    <!--begin: Datatable-->
+                    <h3 class="card-label">
+                        Product Category Table
+                    </h3>
+                    <div class="align-center table-responsive-md">
+                        <table class="table table-green table-hover" style="vertical-align: middle;" id="productCategoryTable">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Product Category Name</th>
+                                    <th scope="col">Product Category Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--end: Datatable-->
+                </div>
+                <div class="card-body">
+                    <!--begin: Datatable-->
+                    <h3 class="card-label">
+                        Product Subcategory Table
+                    </h3>
+                    <div class="align-center table-responsive-md">
+                        <table class="table table-green table-hover" style="vertical-align: middle;" id="productSubCategoryTable">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Product Category ID</th>
+                                    <th scope="col">Product Category Name</th>
+                                    <th scope="col">Product SubCategory Name</th>
+                                    <th scope="col">Product SubCategory Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--end: Datatable-->
+                </div>
+            </div>
+            <!--end::Card-->
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Entry-->
+    <!--end::Entry-->
+    <script>var HOST_URL = "https://goodshepherd.com.ph";</script>
+    <!--begin::Global Config(global config for global JS scripts)-->
+    <script>var KTAppSettings = { "breakpoints": { "sm": 576, "md": 768, "lg": 992, "xl": 1200, "xxl": 1200 }, "colors": { "theme": { "base": { "white": "#ffffff", "primary": "#6993FF", "secondary": "#E5EAEE", "success": "#1BC5BD", "info": "#8950FC", "warning": "#FFA800", "danger": "#F64E60", "light": "#F3F6F9", "dark": "#212121" }, "light": { "white": "#ffffff", "primary": "#E1E9FF", "secondary": "#ECF0F3", "success": "#C9F7F5", "info": "#EEE5FF", "warning": "#FFF4DE", "danger": "#FFE2E5", "light": "#F3F6F9", "dark": "#D6D6E0" }, "inverse": { "white": "#ffffff", "primary": "#ffffff", "secondary": "#212121", "success": "#ffffff", "info": "#ffffff", "warning": "#ffffff", "danger": "#ffffff", "light": "#464E5F", "dark": "#ffffff" } }, "gray": { "gray-100": "#F3F6F9", "gray-200": "#ECF0F3", "gray-300": "#E5EAEE", "gray-400": "#D6D6E0", "gray-500": "#B5B5C3", "gray-600": "#80808F", "gray-700": "#464E5F", "gray-800": "#1B283F", "gray-900": "#212121" } }, "font-family": "Poppins" };</script>
+    <!--end::Global Config-->
+    <!--begin::Global Theme Bundle(used by all pages)-->
+    <script src="~/metronic/dist/assets/plugins/global/plugins.bundle.js"></script>
+    <script src="~/metronic/dist/assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
+    <script src="~/metronic/dist/assets/js/scripts.bundle.js"></script>
+
+    <!--end::Global Theme Bundle-->
+    <!--begin::Page Vendors(used by this page)-->
+    <script src="~/metronic/dist/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
+    <!--end::Page Vendors-->
+    <!--begin::Page Scripts(used by this page)-->
+    <script src="~/metronic/dist/assets/js/pages/widgets.js"></script>
+    <script src="~/Scripts/Product/viewProduct.js"></script>
+    <!--end::Page Scripts-->
+</body>
+</html>
+
+
+
+
+
+

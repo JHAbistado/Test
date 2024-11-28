@@ -5441,8 +5441,12 @@
     <Content Include="metronic\src\plugins\keenthemes-icons\svg\066-calendar-today.svg" />
     <Content Include="metronic\src\plugins\keenthemes-icons\svg\067-clock.svg" />
     <Content Include="metronic\src\plugins\keenthemes-icons\svg\068-dots.svg" />
+    <Content Include="Scripts\Admin\GSBibleVerse.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Home\contactPage.js" />
+    <Content Include="Scripts\Product\addProduct.js" />
+    <Content Include="Scripts\Product\viewProduct.js" />
     <Content Include="SQL\script.sql" />
     <Content Include="wwwroot\assets\crossbrowserjs\excanvas.min.js" />
     <Content Include="wwwroot\assets\crossbrowserjs\html5shiv.js" />
@@ -20273,7 +20277,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ConfigController.cs" />
-    <Compile Include="Controllers\NataniaController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Data\Connection.cs" />
     <Compile Include="Data\Convert.cs" />
@@ -20343,6 +20348,15 @@
     <Content Include="Views\Shared\_Layout_Admin.cshtml" />
     <Content Include="Views\Admin\landing.cshtml" />
     <Content Include="Views\Admin\homeowners_list.cshtml" />
+    <Content Include="Views\Test\Test.cshtml" />
+    <Content Include="Views\Test\register_page.cshtml" />
+    <Content Include="Views\Test\login_page.cshtml" />
+    <Content Include="Views\Test\profile_page.cshtml" />
+    <Content Include="Views\Home\contactPage.cshtml" />
+    <Content Include="Views\Test\addProduct.cshtml" />
+    <Content Include="Views\Product\addProduct.cshtml" />
+    <Content Include="Views\Product\viewProduct.cshtml" />
+    <Content Include="Views\Admin\GSBibleVerse.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -20354,7 +20368,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Security\" />
     <Folder Include="Views\Homeowners\" />
-    <Folder Include="Views\Test\" />
     <Folder Include="wwwroot\assets\img\coming-soon\" />
     <Folder Include="wwwroot\assets\img\cover\" />
     <Folder Include="wwwroot\assets\img\gallery\" />
