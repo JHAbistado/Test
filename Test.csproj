@@ -268,6 +268,7 @@
     <Content Include="assets\bootstrap\css\bootstrap-reboot.min.css" />
     <Content Include="assets\bootstrap\css\bootstrap.min.css" />
     <Content Include="assets\bootstrap\js\bootstrap.min.js" />
+    <Content Include="assets\css\modern_slider.css" />
     <Content Include="assets\dropdown\css\style.css" />
     <Content Include="assets\dropdown\js\nav-dropdown.js" />
     <Content Include="assets\dropdown\js\navbar-dropdown.js" />
@@ -275,6 +276,11 @@
     <Content Include="assets\images\dasher-2.png" />
     <Content Include="assets\images\enjoy-everyday-at-ortigas-malls.png" />
     <Content Include="assets\images\estancia.png" />
+    <Content Include="assets\images\Experiment\designer.jpg" />
+    <Content Include="assets\images\Experiment\developer.jpg" />
+    <Content Include="assets\images\Experiment\editor.jpg" />
+    <Content Include="assets\images\Experiment\gamer.jpg" />
+    <Content Include="assets\images\Experiment\marketer.jpg" />
     <Content Include="assets\images\greenhills.png" />
     <Content Include="assets\images\industria.png" />
     <Content Include="assets\images\landing.png" />
@@ -286,6 +292,7 @@
     <Content Include="assets\images\wild.png" />
     <Content Include="assets\mobirise\css\mbr-additional.css" />
     <Content Include="assets\popper\popper.min.js" />
+    <Content Include="assets\scripts\modern_slider.js" />
     <Content Include="assets\smoothscroll\smooth-scroll.js" />
     <Content Include="assets\socicon\css\styles.css" />
     <Content Include="assets\socicon\fonts\socicon.svg" />
@@ -20277,6 +20284,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ConfigController.cs" />
+    <Compile Include="Controllers\ExperimentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\TestController.cs" />
@@ -20357,6 +20365,7 @@
     <Content Include="Views\Product\addProduct.cshtml" />
     <Content Include="Views\Product\viewProduct.cshtml" />
     <Content Include="Views\Admin\GSBibleVerse.cshtml" />
+    <Content Include="Views\Experiment\modern_slider.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
